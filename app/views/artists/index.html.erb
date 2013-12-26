@@ -1,0 +1,68 @@
+<%= content_for :title, "Artistas" %>
+<div class="col-sm-12 above_title"></div>
+<div class="col-sm-12 title">
+  <h5 class="text-center">Lista de Artistas</h5>
+</div>
+
+<div class="row film-search">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <%= form_tag artists_path, method: "get", :class => "form-horizontal" do %>
+      <div class="input-group input-group-sm">
+        
+        <%= text_field_tag :search, params[:search], class: "form-control" %>
+        <!-- <label for="" class="col-sm-2 control-label">Filtrar</label> -->
+        <span class="input-group-btn">
+          <%= submit_tag "Filtrar", :name => "nil", :class => "btn btn-default", :disable_with => "Aguarde..." %>
+        </span>
+
+      </div>
+    <% end -%>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+<div class="row paginate">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4 text-center">
+    <%= will_paginate @artists, {previous_label: "&larr;", next_label: "&rarr;"} %>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+<div class="col-sm-12">
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Nome de Batismo</th>
+        <th>Nascimento</th>
+        <th>País</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @artists.each do |artist| %>
+        <tr>
+          <td><%= link_to artist.name, artist %></td>
+          <td><%= artist.real_name %></td>
+          <td><%= artist.birthday %></td>
+          <td><%= artist.country %></td>
+          <td><%= link_to 'Edit', edit_artist_path(artist), class: "btn btn-info btn-xs" %></td>
+          <td><%= link_to "Destroy", artist, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-xs"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+    
+  <p class="text-center">
+    <%= link_to 'New Artist', new_artist_path, class: "btn btn-default" %>
+  </p>
+</div>
+
+  

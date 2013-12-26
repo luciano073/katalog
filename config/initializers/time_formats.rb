@@ -1,0 +1,1 @@
+Date::DATE_FORMATS[:br_date] = '%d/%m/%Y'

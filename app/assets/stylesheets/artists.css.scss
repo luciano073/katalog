@@ -1,0 +1,92 @@
+// Place all the styles related to the artists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// $input-height-base: 15px;
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+div.title{
+  // border        : 1px solid #000;
+  background-color : #333333;
+  color            : #fff;
+  margin-bottom    : 20px;
+  // font-weight      : bolder;
+  text-transform: uppercase;
+}
+
+div.above_title{
+  background-color: #66cc66;
+  height: 5px;
+  // margin-top: 2px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+
+
+// ul.token-input-list{
+  // overflow: hidden; 
+  // height: auto !important; 
+  // height: 1%;
+  // width: 190px;
+  // border: 1px solid #ccc;
+  // cursor: text;
+  // font-size: 14px;
+  // font-family: 'Helvetica Neue', Helvetica, Arial;
+  // z-index: 999;
+  // margin: 0;
+  // padding: 0;
+  // background-color: #fff;
+  // list-style-type: none;
+  // clear: left;
+  // -webkit-border-radius: 4px;
+  // -moz-border-radius: 4px;
+  // border-radius: 4px;
+// 
+  // input:focus{
+    // border: 1px solid #3399ff;
+  // }
+// }
+// 
+// ul.token-input-list li {
+    // list-style-type: none;
+// }
+// 
+// ul.token-input-list li input {
+    // border: 0;
+    // width: 350px;
+    // padding: 3px 8px;
+    // background-color: white;
+    // -webkit-appearance: caret;
+// }
+// 
+// li.token-input-token {
+  // overflow: hidden; 
+  // height: auto !important; 
+  // height: 1%;
+  // margin: 3px;
+  // padding: 3px 5px;
+  // background-color: #fff;//#d0efa0;
+  // color: #006633;
+  // font-weight: bold;
+  // cursor: default;
+  // display: block;
+// }
+// 
+// div.token-input-dropdown {
+    // position: absolute;
+    // width: 190px;
+    // background-color: #fff;
+    // overflow: hidden;
+    // border-left: 1px solid #ccc;
+    // border-right: 1px solid #ccc;
+    // border-bottom: 1px solid #ccc;
+    // cursor: default;
+    // font-size: 12px;
+    // font-family: 'Helvetica Neue', Helvetica, Arial;
+    // z-index: 1;
+// }

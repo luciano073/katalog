@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= favicon_link_tag  %>
+    <title> <%= full_title(yield(:title)) %></title>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <%= render 'layouts/header' %>
+   
+    <div class="container">
+
+
+      <div class="row">
+
+        <section id="sidebar" class="col-md-3 side">
+          <p><%= link_to "About Us", "#href", class: "btn btn-xs btn-default"  %></p>
+        </section>
+        <section id="content" class="col-md-9 main">
+          <% if notice %>
+          <section id="notifications" class="alert alert-success">
+            <%= notice %>
+          </section>
+          <% end %>
+          <%= yield %>
+        </section>
+      </div>
+    </div>
+    
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  film_id: 
+  artist_id: 
+  cast: false
+  writer: false
+  director: false
+
+two:
+  film_id: 
+  artist_id: 
+  cast: false
+  writer: false
+  director: false

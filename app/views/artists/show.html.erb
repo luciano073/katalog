@@ -1,0 +1,46 @@
+<div class="row">
+  
+  <div class="col-sm-3">
+    <%= link_to(@artist.photo_url(:normal), data: {lightbox: "photo"}, title: @artist.name) do %>
+      <% image_tag @artist.photo_url(:medium).to_s, class: "img-thumbnail" %>
+    <% end %>
+  </div>
+  <div class="col-sm-9">
+    <h3><%= @artist.name %></h3>
+    <!-- <p>
+      <strong></strong>
+      
+    </p -->
+    <p><small></small></p>
+        
+
+    <p>
+      <strong>Nome de Batismo:</strong>
+      <%= @artist.real_name %>
+    </p>
+
+    <p>
+      <strong>Nascimento:</strong>
+      <%= @artist.birthday %>
+    </p>
+
+    <p>
+      <strong>País:</strong>
+      <%= @artist.country %>
+    </p>
+
+    <p>
+     
+      
+    </p>
+
+    <p>
+      
+    </p>
+
+    <%= link_to 'Edit', edit_artist_path(@artist) %> |
+    <%= link_to 'Back', artists_path %>
+
+  </div>
+
+</div>

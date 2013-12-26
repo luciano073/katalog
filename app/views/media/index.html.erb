@@ -1,0 +1,41 @@
+<h1>Listing media</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Release date</th>
+      <th>Pakage</th>
+      <th>Qtd discs</th>
+      <th>Price</th>
+      <th>Price</th>
+      <th>Art</th>
+      <th>Distribuidora</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @media.each do |medium| %>
+      <tr>
+        <td><%= medium.type %></td>
+        <td><%= medium.release_date %></td>
+        <td><%= medium.pakage %></td>
+        <td><%= medium.qtd_discs %></td>
+        <td><%= medium.price %></td>
+        <td><%= medium.price %></td>
+        <td><%= medium.art %></td>
+        <td><%= medium.distribuidora %></td>
+        <td><%= link_to 'Show', medium %></td>
+        <td><%= link_to 'Edit', edit_medium_path(medium) %></td>
+        <td><%= link_to 'Destroy', medium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Medium', new_medium_path %>

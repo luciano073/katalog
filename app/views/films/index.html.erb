@@ -1,0 +1,64 @@
+
+<div class="col-sm-12 above_title"></div>
+<div class="col-sm-12 title">
+  <h5 class="text-center">Lista de Filmes</h5>
+</div>
+
+<div class="row film-search">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <%= form_tag films_path, method: "get", :class => "form-horizontal" do %>
+      <div class="input-group input-group-sm">
+        
+        <%= text_field_tag :search, params[:search], class: "form-control" %>
+        <!-- <label for="" class="col-sm-2 control-label">Filtrar</label> -->
+        <span class="input-group-btn">
+          <%= submit_tag "Filtrar", :name => "nil", :class => "btn btn-default", :disable_with => "Aguarde..." %>
+        </span>
+
+      </div>
+    <% end -%>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+<div class="row paginate">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4 text-center">
+    <%= will_paginate @films, {previous_label: "&larr;", next_label: "&rarr;"} %>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+<div class="col-sm-12">
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Brazilian title</th>
+        <th>Title</th>
+        <th>Release</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @films.each do |film| %>
+        <tr>
+          <td><%= link_to film.brazilian_title, film %></td>
+          <td><%= film.title %></td>
+          <td><%= film.release %></td>
+          <td><%= link_to 'Edit', edit_film_path(film), class: "btn btn-info btn-xs" %></td>
+          <td><%= link_to "Destroy", film, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+    
+  <p class="text-center">
+    <%= link_to 'New Film', new_film_path, class: "btn btn-default" %>
+  </p>
+</div>

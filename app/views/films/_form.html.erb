@@ -1,0 +1,80 @@
+<%= form_for(@film, html: {multipart: true, class: "form-horizontal"}) do |f| %>
+  <!-- <%# if @film.errors.any? %> -->
+    <!-- <div id="error_explanation"> -->
+      <!-- <h2><%#= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h2> -->
+<!--  -->
+      <!-- <ul> -->
+      <!-- <%# @film.errors.full_messages.each do |msg| %> -->
+        <!-- <li><%#= msg %></li> -->
+      <!-- <%# end %> -->
+      <!-- </ul> -->
+    <!-- </div> -->
+  <!-- <%# end %> -->
+
+  <div class="form-group">
+    <%= f.label :title, class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_field :title, class: "form-control fill" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :brazilian_title, class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_field :brazilian_title, class: "form-control fill" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :release, class: "col-sm-3 control-label" %>
+    <div class="col-sm-2">
+      <%= f.text_field :release, class: "form-control date fill" %>
+      <%#= f.date_select(:release, {}, class: "small", display: "inline-block") %>
+    </div>
+    <%= f.label :genre, "Gênero", class: "col-sm-1 control-label" %>
+    <div class="col-sm-4">
+      <%= f.select :genre, options_for_select(@genres, @film.genre), {include_blank: true}, class: "form-control fill"  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :director_tokens, "Diretores", class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_field :director_tokens, class: "form-control directors", data:
+      {pre: @directors.as_json(only: [:id, :name])} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :writer_tokens, "Roteiristas", class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_field :writer_tokens, class: "form-control writers", data: {pre:
+        @writers.as_json(only: [:id, :name])} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :cast_tokens, "Elenco", class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_field :cast_tokens, class: "form-control cast", data: {pre: 
+        @cast.as_json(only: [:id, :name])} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :synopse, class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_area :synopse, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :poster, class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= image_tag @film.poster_url(:thumb), class: "img-thumbnail" if @film.poster? %>
+      <%= f.file_field :poster %>
+      <%= f.hidden_field :poster_cache %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-7">
+      <%= f.submit nil, data: {:disable_with => 'Criando...'}, class: "btn btn-default" %>
+    </div>
+  </div>
+<% end %>

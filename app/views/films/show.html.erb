@@ -1,0 +1,59 @@
+<div class="row">
+  
+  <div class="col-sm-3">
+    <%= link_to(@film.poster_url(:normal), data: {lightbox: "poster"}, title: normaliza_title(@film.brazilian_title)) do %>
+      <% image_tag @film.poster_url(:medium), class: "img-thumbnail" %>
+    <% end %>
+  </div>
+  <div class="col-sm-9">
+    <p>
+      <strong><%= normaliza_title(@film.brazilian_title) %></strong>
+      <small><%= "(#{@film.release.year})" if @film.release%></small>
+    </p>
+    <!-- <p>
+      <strong></strong>
+      
+    </p -->
+    <p><small> " <%= normaliza_title(@film.title) %> "</small></p>
+        
+
+    <p>
+      <strong>Release: </strong>
+      <%= @film.release %>
+    </p>
+
+    <p>
+      <strong>Genero: </strong>
+      <%= @film.genre %>
+    </p>
+
+    <p>
+      <strong>Synopse: </strong>
+      <%= @film.synopse %>
+    </p>
+    
+    </p>
+      <strong>Diretor(a): </strong>
+      <%= @film.directors_names %>
+    <p>
+
+    </p>
+      <strong>Roteirista: </strong>
+      <%= @film.writers_names %>
+    <p>
+
+    <p>
+      <strong>Elenco: </strong>
+      <%= @film.cast_names %>
+      
+    
+      
+    </p>
+
+    <%= link_to 'Edit', edit_film_path(@film) %> |
+    <%= link_to 'Back', films_path %>
+
+  </div>
+
+</div>
+

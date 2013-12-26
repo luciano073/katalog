@@ -1,0 +1,67 @@
+<%= form_for(@artist, html: {multpart: true, class: "form-horizontal"}) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "Nome Artístico", class: "col-sm-3 control-label" %>
+      <div class="col-sm-7">
+        <%= f.text_field :name, placeholder: "nickname", class: "form-control fill" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :real_name, "Nome de Batismo", class: "col-sm-3 control-label" %>
+      <div class="col-sm-7">
+        <%= f.text_field :real_name, class: "form-control fill" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :height, "Estatura", class: "col-sm-3 control-label" %>
+      <div class="col-sm-3 input-group">
+        <%= f.number_field :height, class: "form-control fill text-right" %>
+        <span class="input-group-addon">cm</span>
+      </div>
+      <%= f.label :country, "País", class: "col-sm-1 control-label" %>
+      <div class="col-sm-3 country">
+        <%= f.text_field :country, class: "form-control fill", data: {countries: @countries}, placeholder: "Digite para buscar..." %>
+        <%#= f.hidden_field :country, class: "form-control fill select2", data: {countries: $countries.as_json} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="artist_birthday" class="col-sm-3 control-label">
+        <span class="glyphicon glyphicon-star tip" data-toggle="tooltip"
+        title="Nascimento"></span>
+      </label>
+      <div class="col-sm-3">
+        <%= f.text_field :birthday, class: "form-control date fill text-center" %>
+        <p><%#= @artist.birthday.class %></p>
+      </div>      
+      <label for="artist_death" class="col-sm-1 control-label">
+        <span class="glyphicon glyphicon-remove tip"
+        data-toggle="tooltip" title="Falecimento"></span>
+      </label>
+        <div class="col-sm-3">
+          <%= f.text_field :death, class: "form-control date fill text-center" %>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :profession_tokens, "Atividades", class: "col-sm-3 control-label" %>
+      <div class="col-sm-3 profession">
+        <%= f.text_field :profession_tokens, class: "form-control fill", data: {professions: Profession.all.as_json(only: [:id, :name]), pre: @artist.professions.as_json(only: [:id, :name])} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :photo, "Foto", class: "col-sm-3 control-label" %>
+      <div class="col-sm-7">
+        <%= image_tag @artist.photo_url(:thumb), class: "img-thumbnail" if @artist.photo? %>
+        <%= f.file_field :photo %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-7">
+        <%= f.submit nil, data: {:disable_with => 'Criando...'}, class: "btn btn-sm btn-default" %>
+      </div>
+    </div>
+<% end %>
