@@ -34,26 +34,32 @@
     
     </p>
       <strong>Diretor(a): </strong>
-      <%= @film.directors_names %>
+      <%= @film.directors.map(&:name).join(", ") unless @film.directors.empty? %>
     <p>
 
     </p>
       <strong>Roteirista: </strong>
-      <%= @film.writers_names %>
+      <%= @film.writers.map(&:name).join(", ") unless @film.writers.empty? %>
     <p>
 
     <p>
       <strong>Elenco: </strong>
-      <%= @film.cast_names %>
-      
-    
-      
+      <%= @film.cast.map(&:name).join(", ") unless @film.cast.empty? %>
+            
     </p>
-
+    <% unless @film.cast.empty? %>
+      <ul id="film_cast" class="bxslider">
+        <% @film.cast.each do |a| %>
+          <li><%= link_to(image_tag(a.photo_url(:thumb), title: a.name, class: "img-thumbnail"), a) %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <%= link_to 'Edit', edit_film_path(@film) %> |
     <%= link_to 'Back', films_path %>
 
   </div>
+
+  
 
 </div>
 

@@ -18,6 +18,7 @@
 //= require bootstrap
 // require bootstrap-tokenfield
 //= require meiomask.min
+//= require jquery.bxslider.min
 //= require lightbox-2.6.min
 //= require jquery.tokeninput
 // require select2
@@ -27,6 +28,20 @@
 jQuery(function () {
 
   $('input.date').setMask('date'); //Plugin meiomask
+
+  $('#film_cast').bxSlider({
+    auto: true,
+    // autoControls: true,
+    // captions: true,
+    controls: false,
+    autoHover: true,
+    minSlides: 1,
+    maxSlides: 4,
+    speed: 3000,
+    slideMargin: 10,
+    moveSlides: 1,
+    slideWidth: 130
+  });
 
 });
 

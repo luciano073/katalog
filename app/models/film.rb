@@ -3,7 +3,7 @@ class Film < ActiveRecord::Base
   attr_reader :director_tokens
   attr_reader :writer_tokens
   attr_reader :poster_cache
-  attr_accessor :cast, :writers, :directors
+  attr_accessor :cast_ids, :writers_ids, :directors_ids
   
 
   after_find do
@@ -22,37 +22,37 @@ class Film < ActiveRecord::Base
   scope :random, -> {order('random()')}
 
   
-  def cast_names
-    cast = self.production_team.map { |e| e.artist if e.cast? }.compact
-    cast.map(&:name).join(", ") unless cast.empty?
+  def cast
+    self.production_team.map { |e| e.artist if e.cast? }.compact
+    # cast.map(&:name).join(", ") unless cast.empty?
   end
 
-  def directors_names
-    directors = self.production_team.map { |e| e.artist if e.director? }.compact
-    directors.map(&:name).join(", ") unless directors.empty?
+  def directors
+    self.production_team.map { |e| e.artist if e.director? }.compact
+    # directors.map(&:name).join(", ") unless directors.empty?
   end
 
-  def writers_names
-    writers = self.production_team.map { |e| e.artist if e.writer? }.compact
-    writers.map(&:name).join(", ") unless writers.empty?
+  def writers
+    self.production_team.map { |e| e.artist if e.writer? }.compact
+    # writers.map(&:name).join(", ") unless writers.empty?
   end
 
   def cast_tokens=(ids)
-    # self.artist_ids = ids.split(",")
+    # self.cast_tokens = ids.split(",")
     # self.cast.clear unless self.cast.empty?
-    self.cast = ids.split(",")
+    self.cast_ids = ids.split(",")
   end
 
   def director_tokens=(ids)
     # self.artist_ids = ids.split(",")
     # self.directors.clear unless self.directors.empty?
-    self.directors = ids.split(",")
+    self.directors_ids = ids.split(",")
   end
 
   def writer_tokens=(ids)
     # self.artist_ids = ids.split(",")
     # self.writers.clear unless self.writers.empty?
-    self.writers = ids.split(",")
+    self.writers_ids = ids.split(",")
   end
 
   def self.search(search)
@@ -68,20 +68,20 @@ class Film < ActiveRecord::Base
 
   def set_production_team
     self.production_team.clear unless self.new_record?
-    unless self.directors.empty?
-      self.directors.each do |d|
+    unless self.directors_ids.empty?
+      self.directors_ids.each do |d|
         self.production_team.build(artist_id: d.to_i, director: true)
       end
     end
 
-    unless self.writers.empty?
-      self.writers.each do |w|
+    unless self.writers_ids.empty?
+      self.writers_ids.each do |w|
         self.production_team.build(artist_id: w.to_i, writer: true)
       end
     end
 
-    unless self.cast.empty?
-      self.cast.each do |c|
+    unless self.cast_ids.empty?
+      self.cast_ids.each do |c|
         self.production_team.build(artist_id: c.to_i, cast: true)
       end
     end
