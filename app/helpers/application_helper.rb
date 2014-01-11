@@ -8,11 +8,19 @@ module ApplicationHelper
     end
   end
 
-  def normaliza_title(str)
+  def normalize_title(str) #Film title (ex. "terminator, the" becomes "the terminator")
     re = /,\s+[ao]s?n?\z|,\s+the\z|,\s+u[mn]a?s?\z/i
     str.sub!(re, '')
     return str unless $~
     str.prepend("#{$~.to_s.delete(",").lstrip} ")
   end
 
+  # def lessif(options {})
+  #   if "#{options[:model]}.#{options[:attribute]}"
+  #     return "#{options[:form_builder]} #{options[:attr]}, class:'#{options[:class]}'" +
+  #     " #{options[:data]} #{options[:value]}"
+  #   else
+      
+  #   end
+  # end
 end

@@ -9,8 +9,7 @@ jQuery(function() {
       hintText          : "Digite para buscar",
       noResultsText     : "Sem resultados",
       searchingText     : "Buscando..."
-    }
-  );
+    });
 
  $('input.writers').tokenInput('/artists/writers.json',
     {
@@ -22,8 +21,7 @@ jQuery(function() {
       hintText          : "Digite para buscar",
       noResultsText     : "Sem resultados",
       searchingText     : "Buscando..."
-    }
-  );
+    });
 
   $('input.cast').tokenInput('/artists/cast.json',
     {
@@ -36,7 +34,38 @@ jQuery(function() {
       noResultsText     : "Sem resultados",
       searchingText     : "Buscando..."
 
-    }
-  );
+    });
+
+  $('.film_country').tokenInput('/countries',
+    {
+      theme            : "film-country",
+      tokenLimit       : 1,
+      prePopulate      : $('.film_country').data('pre'),
+      searchDelay      : 200,
+      hintText         : "Digite para buscar",
+      noResultsText    : "Sem resultados",
+      searchingText    : "Buscando...",
+      resultsFormatter : function(item){
+        return "<li><img src='" + item.url_16 + "' /> &nbsp; " + item.name + "</li>";
+      },
+      tokenFormatter   : function(item){
+        return "<li><p><img src='" + item.url_16 + "' /> &nbsp; " + item.name + "</p></li>"; 
+      }      
+      
+    });
+
+  $('#film_cast').bxSlider({
+    auto            : true,
+    // autoControls : true,
+    // captions     : true,
+    controls        : false,
+    autoHover       : true,
+    minSlides       : 1,
+    maxSlides       : 4,
+    speed           : 3000,
+    slideMargin     : 10,
+    moveSlides      : 1,
+    slideWidth      : 130
+  });
 
 });

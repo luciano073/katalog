@@ -22,7 +22,7 @@
         <section id="sidebar" class="col-md-3 side">
           <p><%= link_to "About Us", "#href", class: "btn btn-xs btn-default"  %></p>
         </section>
-        <section id="content" class="col-md-9 main">
+        <section id="content" class="col-md-9 main" data-no-turbolink>
           <% if notice %>
           <section id="notifications" class="alert alert-success">
             <%= notice %>

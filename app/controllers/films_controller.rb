@@ -23,14 +23,18 @@ class FilmsController < ApplicationController
   # GET /films/1/edit
   def edit    
 
-    @directors = []
-    @cast = []
-    @writers = []
-    @film.production_team.each do |e|
-      @directors << e.artist if e.director?
-      @writers << e.artist if e.writer?
-      @cast << e.artist if e.cast?
-    end
+    # @directors = []
+    # @cast = []
+    # @writers = []
+    # @film.production_team.each do |e|
+    #   @directors << e.artist if e.director?
+    #   @writers << e.artist if e.writer?
+    #   @cast << e.artist if e.cast?
+    #   if (!e.cast? and !e.director? and !e.writer?)        
+    #     @cast << e.artist
+    #   end
+    # end
+    # @country = []
   end
 
   # POST /films
@@ -38,7 +42,7 @@ class FilmsController < ApplicationController
   def create
     # render text: params
     # render text: params[:film]
-    # @film = Film.new(film_params)
+    @film = Film.new(film_params)
     # render inline: "<%= @film.production_team.inspect %>"
     respond_to do |format|
       if @film.save
@@ -84,7 +88,7 @@ class FilmsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
       params.require(:film).permit(:title, :brazilian_title, :release, :synopse, :poster, :genre,
-        :cast_tokens, :writer_tokens, :director_tokens, :poster_cache)
+        :cast_tokens, :writer_tokens, :director_tokens, :poster_cache, :country_id, :length)
     end
 
     # def set_production_team

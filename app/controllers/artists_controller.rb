@@ -1,11 +1,11 @@
 class ArtistsController < ApplicationController
   respond_to :html, :json
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
-  before_action :countries_list, only: [:new, :edit]
   
 
 	def index
-    @artists = Artist.search(params[:search]).paginate(page: params[:page], per_page: 10).order('artists.name')
+    @artists = Artist.search(params[:search]).paginate(page: params[:page],
+        per_page: 10).order('artists.name')
     respond_with @artists.as_json(only: [:id, :name])
 	end
 
@@ -74,27 +74,13 @@ class ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
   end
 
-  def countries_list
-    @countries = [
-                  "Brasil"        , 'Estados Unidos' , "Inglaterra" , 
-                  "Espanha"       , "Canadá"         , "Australia"  , 
-                  "França"        , "Alemanha"       , "Portugal"   , 
-                  "Coreia do Sul" , "Japão"          , "Líbano"     , 
-                  "México"        , "Irã"            , "Chile"      ,
-                  "Argentina" 
-                 ].sort
-  end
-
+  
   # Never trust parameters from the scary internet, only allow the white list through.
   def artist_params
     params.require(:artist).permit(:name, :real_name, :profession_tokens,
-      :birthday, :country, :photo, :height, :death)
+      :birthday, :country_id, :photo, :height, :death)
     # params.require(:film).permit(:artist_tokens)
   end
 
-  def date_format
-    set_artist
-    @artist.birthday = @artist.birthday.to_s(:br_date)
-  end
-  
+    
 end

@@ -8,15 +8,16 @@ class Artist < ActiveRecord::Base
   end
 	
   has_and_belongs_to_many :professions
-  has_many :films, :through => :production_team
-  has_many :production_team, dependent: :nullify
+  has_many                :films, :through => :production_team
+  has_many                :production_team, dependent: :nullify
+  belongs_to              :country
 
   mount_uploader :photo, PhotoUploader
 
   scope :directors, -> { joins(:professions).where(professions: {id: 2})}
-  scope :writers, -> { joins(:professions).where(professions: {id: 3})}
-  scope :cast, -> { joins(:professions).where(professions: {id: [1, 4]})}
-  scope :random, -> {order('random()')} #specific to postgresql
+  scope :writers,   -> { joins(:professions).where(professions: {id: 3})}
+  scope :cast,      -> { joins(:professions).where(professions: {id: [1, 4]})}
+  scope :random,    -> {order('random()')} #specific to postgresql
 
 
   def profession_tokens=(ids)
@@ -33,9 +34,19 @@ class Artist < ActiveRecord::Base
 
   protected
   def name_normalize
-    self.name = self.name.strip.squeeze(' ').nome_proprio if self.name
-    self.real_name = self.real_name.strip.squeeze(' ').nome_proprio if
-    self.real_name
+    re = /\s+[ixv]{,3}\z/i # for names ends with II, III and so on
+    if self.name
+      str = self.name.strip.squeeze(' ').nome_proprio
+      str =~ re
+      self.name = str.sub(re, $~.to_s.upcase)      
+    end
+
+    if self.real_name
+      str = self.real_name.strip.squeeze(' ').nome_proprio
+      str =~ re
+      self.real_name = str.sub(re, $~.to_s.upcase)
+    end
+    
   end
 
 end

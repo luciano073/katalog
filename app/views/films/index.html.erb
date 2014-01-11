@@ -13,7 +13,7 @@
         <%= text_field_tag :search, params[:search], class: "form-control" %>
         <!-- <label for="" class="col-sm-2 control-label">Filtrar</label> -->
         <span class="input-group-btn">
-          <%= submit_tag "Filtrar", :name => "nil", :class => "btn btn-default", :disable_with => "Aguarde..." %>
+          <%= submit_tag "Filtrar", :name => "nil", :class => "btn btn-default", data: {:disable_with => "Aguarde..."} %>
         </span>
 
       </div>
@@ -48,7 +48,7 @@
         <tr>
           <td><%= link_to film.brazilian_title, film %></td>
           <td><%= film.title %></td>
-          <td><%= film.release %></td>
+          <td><%= film.release.to_formatted_s(:br_date) if film.release %></td>
           <td><%= link_to 'Edit', edit_film_path(film), class: "btn btn-info btn-xs" %></td>
           <td><%= link_to "Destroy", film, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"%>
           </td>
@@ -59,6 +59,6 @@
   
     
   <p class="text-center">
-    <%= link_to 'New Film', new_film_path, class: "btn btn-default" %>
+    <%= link_to 'New Film', new_film_path, class: "btn btn-default btn-xs" %>
   </p>
 </div>

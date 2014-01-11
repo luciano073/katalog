@@ -13,7 +13,7 @@
         <%= text_field_tag :search, params[:search], class: "form-control" %>
         <!-- <label for="" class="col-sm-2 control-label">Filtrar</label> -->
         <span class="input-group-btn">
-          <%= submit_tag "Filtrar", :name => "nil", :class => "btn btn-default", :disable_with => "Aguarde..." %>
+          <%= submit_tag "Filtrar", :name => "nil", :class => "btn btn-default", data: {:disable_with => "Aguarde..."} %>
         </span>
 
       </div>
@@ -49,10 +49,10 @@
         <tr>
           <td><%= link_to artist.name, artist %></td>
           <td><%= artist.real_name %></td>
-          <td><%= artist.birthday %></td>
-          <td><%= artist.country %></td>
-          <td><%= link_to 'Edit', edit_artist_path(artist), class: "btn btn-info btn-xs" %></td>
-          <td><%= link_to "Destroy", artist, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-xs"%>
+          <td><%= artist.birthday.to_s(:br_date) if artist.birthday %></td>
+          <td><%= artist.country.name if artist.country %></td>
+          <td><%= link_to 'Editar', edit_artist_path(artist), class: "btn btn-info btn-xs" %></td>
+          <td><%= link_to "Excluir", artist, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-xs"%>
           </td>
         </tr>
       <% end %>
@@ -61,7 +61,7 @@
   
     
   <p class="text-center">
-    <%= link_to 'New Artist', new_artist_path, class: "btn btn-default" %>
+    <%= link_to 'Novo Artista', new_artist_path, class: "btn btn-default btn-xs" %>
   </p>
 </div>
 

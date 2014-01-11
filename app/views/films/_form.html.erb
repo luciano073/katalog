@@ -1,4 +1,4 @@
-<%= form_for(@film, html: {multipart: true, class: "form-horizontal"}) do |f| %>
+<%= form_for(@film, html: {multipart: true, class: "form-horizontal", role: 'form'}) do |f| %>
   <!-- <%# if @film.errors.any? %> -->
     <!-- <div id="error_explanation"> -->
       <!-- <h2><%#= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h2> -->
@@ -14,45 +14,57 @@
   <div class="form-group">
     <%= f.label :title, class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
-      <%= f.text_field :title, class: "form-control fill" %>
+      <%= f.text_field :title, class: "form-control input-sm fill" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :brazilian_title, class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
-      <%= f.text_field :brazilian_title, class: "form-control fill" %>
+      <%= f.text_field :brazilian_title, class: "form-control input-sm fill" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :release, class: "col-sm-3 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :release, class: "form-control date fill" %>
+    <div class="col-sm-3">
+      <%= f.text_field :release, class: "form-control input-sm date fill" %>
       <%#= f.date_select(:release, {}, class: "small", display: "inline-block") %>
     </div>
     <%= f.label :genre, "Gênero", class: "col-sm-1 control-label" %>
-    <div class="col-sm-4">
-      <%= f.select :genre, options_for_select(@genres, @film.genre), {include_blank: true}, class: "form-control fill"  %>
+    <div class="col-sm-3">
+      <%= f.select :genre, options_for_select(@genres, @film.genre), {include_blank: true}, class: "form-control input-sm fill"  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :length, class: "col-sm-3 control-label" %>
+    <div class="col-sm-3 input-group">
+      <%= f.number_field :length, class: "form-control input-sm fill text-right"
+      %><span class="input-group-addon">min</span>
+    </div>
+    <%= f.label :country_id, "País", class: "col-sm-1 control-label" %>
+    <div class="col-sm-3">
+      <%= f.text_field :country_id, class: "film_country", data: 
+      {pre: Array.new(1, @film.country.as_json(only: [:id, :name], methods: :url_16))}  %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :director_tokens, "Diretores", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
       <%= f.text_field :director_tokens, class: "form-control directors", data:
-      {pre: @directors.as_json(only: [:id, :name])} %>
+      {pre: @film.directors.as_json(only: [:id, :name])} %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :writer_tokens, "Roteiristas", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
       <%= f.text_field :writer_tokens, class: "form-control writers", data: {pre:
-        @writers.as_json(only: [:id, :name])} %>
+        @film.writers.as_json(only: [:id, :name])} %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :cast_tokens, "Elenco", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
       <%= f.text_field :cast_tokens, class: "form-control cast", data: {pre: 
-        @cast.as_json(only: [:id, :name])} %>
+        @film.cast.as_json(only: [:id, :name])} %>
     </div>
   </div>
 
@@ -74,7 +86,7 @@
   
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-7">
-      <%= f.submit nil, data: {:disable_with => 'Criando...'}, class: "btn btn-default" %>
+      <%= f.submit nil, data: {:disable_with => 'Criando...'}, class: "btn btn-default btn-xs" %>
     </div>
   </div>
 <% end %>

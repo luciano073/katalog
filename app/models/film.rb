@@ -3,18 +3,43 @@ class Film < ActiveRecord::Base
   attr_reader :director_tokens
   attr_reader :writer_tokens
   attr_reader :poster_cache
-  attr_accessor :cast_ids, :writers_ids, :directors_ids
+  attr_accessor :cast_ids, :writer_ids, :director_ids
+  attr_accessor :cast_has_changed, :writers_has_changed, :directors_has_changed
+  # @cast_has_changed, @writers_has_changed, @directors_has_changed = false
   
-
-  after_find do
+  after_initialize do
     self.release = self.release.to_s(:br_date) if self.release
+    self.cast_ids ||= self.cast.map(&:id)
+    self.writer_ids ||= self.writers.map(&:id)
+    self.director_ids ||= self.directors.map(&:id)
+    self.cast_has_changed = false
+    self.writers_has_changed = false
+    self.directors_has_changed = false
+    
+    if self.new_record?
+      self.cast_has_changed = true
+      self.writers_has_changed = true
+      self.directors_has_changed = true
+      self.cast_ids = []
+      self.director_ids = []
+      self.writer_ids = []
+    end
+    
+    if not self.artist_ids.empty? and self.cast.empty? and self.writers.empty? and self.directors.empty?
+      self.cast_ids += self.artist_ids      
+    end
   end
-  before_save :set_production_team, on: [:create, :update]
+
+  before_save :set_production_team, on: [:create, :update], if: :production_team_has_changed?
+  # before_save :set_production_team, on: [:create, :update], if: :writers_has_changed?
+  # before_save :set_production_team, on: [:create, :update], if: :directors_has_changed?
   before_save :bd_title, on: [:create, :update]
 
   mount_uploader :poster, PosterUploader #Gem carrierwave
-  has_many :production_team, dependent: :destroy
-  has_many :artists, :through => :production_team
+  has_many       :production_team, dependent: :destroy
+  has_many       :artists, :through => :production_team
+  belongs_to :country
+
 
   # has_and_belongs_to_many :prizes, :join_table => "PrizeEdition"
   # has_and_belongs_to_many :media
@@ -37,22 +62,39 @@ class Film < ActiveRecord::Base
     # writers.map(&:name).join(", ") unless writers.empty?
   end
 
+  def production_team_has_changed?
+    if self.cast_has_changed or self.writers_has_changed or self.directors_has_changed
+      return true
+    else
+      return false
+    end
+  end
+
   def cast_tokens=(ids)
-    # self.cast_tokens = ids.split(",")
-    # self.cast.clear unless self.cast.empty?
+    unless self.new_record?
+      unless self.cast_ids.map { |e| e.to_s } == ids.split(",")
+        self.cast_has_changed = true    
+      end
+    end
     self.cast_ids = ids.split(",")
   end
 
   def director_tokens=(ids)
-    # self.artist_ids = ids.split(",")
-    # self.directors.clear unless self.directors.empty?
-    self.directors_ids = ids.split(",")
+    unless self.new_record?
+      unless self.director_ids.map { |e| e.to_s } == ids.split(",")
+        self.directors_has_changed = true
+      end
+    end
+    self.director_ids = ids.split(",")
   end
 
   def writer_tokens=(ids)
-    # self.artist_ids = ids.split(",")
-    # self.writers.clear unless self.writers.empty?
-    self.writers_ids = ids.split(",")
+    unless self.new_record?  
+      unless self.writer_ids.map { |e| e.to_s } == ids.split(",")
+        self.writers_has_changed = true    
+      end
+    end
+    self.writer_ids = ids.split(",")
   end
 
   def self.search(search)
@@ -66,16 +108,17 @@ class Film < ActiveRecord::Base
   
   protected
 
+  
   def set_production_team
     self.production_team.clear unless self.new_record?
-    unless self.directors_ids.empty?
-      self.directors_ids.each do |d|
+    unless self.director_ids.empty?      
+      self.director_ids.each do |d|
         self.production_team.build(artist_id: d.to_i, director: true)
       end
     end
 
-    unless self.writers_ids.empty?
-      self.writers_ids.each do |w|
+    unless self.writer_ids.empty?
+      self.writer_ids.each do |w|
         self.production_team.build(artist_id: w.to_i, writer: true)
       end
     end

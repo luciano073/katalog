@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131225152107) do
+ActiveRecord::Schema.define(version: 20140105210945) do
 
   create_table "artists", force: true do |t|
     t.string   "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20131225152107) do
     t.datetime "updated_at"
     t.string   "country"
     t.string   "photo"
+    t.integer  "country_id"
   end
 
   create_table "artists_professions", id: false, force: true do |t|
@@ -33,6 +34,14 @@ ActiveRecord::Schema.define(version: 20131225152107) do
   add_index "artists_professions", ["artist_id", "profession_id"], name: "index_artists_professions_on_artist_id_and_profession_id", using: :btree
   add_index "artists_professions", ["profession_id", "artist_id"], name: "index_artists_professions_on_profession_id_and_artist_id", using: :btree
 
+  create_table "countries", force: true do |t|
+    t.string   "name"
+    t.string   "english_name"
+    t.string   "flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "films", force: true do |t|
     t.string   "title"
     t.string   "brazilian_title"
@@ -42,6 +51,8 @@ ActiveRecord::Schema.define(version: 20131225152107) do
     t.datetime "updated_at"
     t.string   "genre"
     t.string   "poster"
+    t.integer  "country_id"
+    t.string   "length"
   end
 
   create_table "media", force: true do |t|
@@ -54,6 +65,7 @@ ActiveRecord::Schema.define(version: 20131225152107) do
     t.string   "distribuidora"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "country_id"
   end
 
   create_table "production_team", force: true do |t|

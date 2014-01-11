@@ -1,6 +1,5 @@
 Katalog::Application.routes.draw do
-  resources :media
-
+  
   get "welcome/index"
   get "artists/writers"
   get "artists/directors"
@@ -21,7 +20,8 @@ Katalog::Application.routes.draw do
   #   resources :products
   resources :artists
   resources :films
-  
+  resources :countries
+  resources :media
   # Example resource route with options:
   #   resources :products do
   #     member do
