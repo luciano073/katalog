@@ -4,14 +4,15 @@ set :repository,  "git://github.com/luciano073/katalog.git"
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :user, "vagrant"
-set :deploy_to, "home/vagrant/katalog/apps/#{application}"
+set :deploy_to, "/home/vagrant/katalog/apps/#{application}"
 
 role :web, "localhost"                          # Your HTTP server, Apache/etc
 role :app, "localhost"                          # This may be the same as your `Web` server
 role :db,  "localhost", :primary => true # This is where Rails migrations will run
 # role :db,  "your slave db-server here"
-set :port, 2222
+set :port, 22
 set :keep_releases, 5
+set :use_sudo, false
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
@@ -25,4 +26,9 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+end
+
+task :symlink_database_yml do
+  run "rm #{release_path}/config/database.yml"
+  run "ln -sfn #{shared_path}/config/database.yml #{release_path}/config/database.yml"
 end
