@@ -99,7 +99,7 @@ class Film < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('i_diacritical(films.brazilian_title) ILIKE i_diacritical(?)', "%#{search}%")
+      where('i_unaccent(films.brazilian_title) ILIKE i_unaccent(?)', "%#{search}%")
     else
       self.all
     end

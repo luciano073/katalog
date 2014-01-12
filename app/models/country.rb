@@ -4,12 +4,12 @@ class Country < ActiveRecord::Base
   has_many :media, :class_name => "medium"
 
   mount_uploader :flag, FlagUploader
-  # scope :finder, lambda { |q| where("i_diacritical(countries.name) ilike
-  # i_diacritical(:q)", q: "%#{q}%") }
+  # scope :finder, lambda { |q| where("i_unaccent(countries.name) ilike
+  # i_unaccent(:q)", q: "%#{q}%") }
 
   def self.search(search)
     if search
-      where("i_diacritical(#{self.table_name}.name) ILIKE i_diacritical(?)", "%#{search}%")
+      where("i_unaccent(#{self.table_name}.name) ILIKE i_unaccent(?)", "%#{search}%")
     else
       self.all
     end

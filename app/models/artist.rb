@@ -26,7 +26,7 @@ class Artist < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where("i_diacritical(#{self.table_name}.name) ILIKE i_diacritical(?)", "%#{search}%")
+      where("i_unaccent(#{self.table_name}.name) ILIKE i_unaccent(?)", "%#{search}%")
     else
       self.all
     end
