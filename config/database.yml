@@ -16,7 +16,7 @@ development:
 # 
 production:
   <<: *defaults
-  database: katalog_app
+  database: katalog
 
 # SQLite version 3.x
 #   gem install sqlite3
