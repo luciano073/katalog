@@ -26,9 +26,12 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+
+  desc "Cria link para database.yml"
+  task :symlink_database_yml do
+    run "rm #{release_path}/config/database.yml"
+    run "ln -sfn #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
 end
 
-task :symlink_database_yml do
-  run "rm #{release_path}/config/database.yml"
-  run "ln -sfn #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-end
+
