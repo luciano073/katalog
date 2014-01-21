@@ -9,67 +9,34 @@ jQuery(function() {
   $('span.tip').tooltip();
   $('input#artist_height').setMask({ mask: '299'});
 
-  //Plugin select2
-  $('#artist_country_id').select2({
-    placeholder : '--',
-    alowclear   : true,
-    ajax: {
-      url      : $('#artist_country_id').data('source'), //'/countries.json',
-      dataType : 'json',
-      data     : function(term, page) { return { q: term, page: page}; },
-      results  : function(data, page) { return {results: data};}
-           // alert(data[0].flag.flag._16.url);
-        // return  {results: $.map(data, function(country, index) {
-            // return {id: country.id, text: country.name, flag: country.flag};
-          // })
-        // }
-      // }
-    },
-    formatResult: format,
-    formatSelection: format,
-    initSelection: function (item, callback) { //Prepopulate
-                var id = item.val();
-                var text = item.data('option');
-                var flag = item.data('flag');
-                var data = { id: id, text: text, img_url: flag };
-                callback(data);
-    },
-    escapeMarkup: function(m) {return m;}
-  });
-
-  function format(country) {
-    return  "<img class='flag' src='" + country.img_url + "' /> &nbsp;" + country.text;
-  }
-//Plugin token input
-  // $('#artist_country').tokenInput($('#artist_country').data('countries'),
-    // { 
-      // tokenLimit        : 1,
-      // tokenValue        : "name",
-      // animateDropdown   : false,
-      // hintText          : null,
-      // noResultsText     : "Sem resultados",
-      // searchingText     : "Buscando...",
-      // preventDuplicates : true,
-      // theme          : "facebook"
-    // }
-    // );
-
-  // $('#artist_country').autocomplete({
-  //   source: $('#artist_country').data('countries'),//['jô','josé','green','yellow','violet','brown','purple','black','white'],
-  //   delay: 0
-    // select: function(event, ui) {
-      // $(this).val(ui.item.id);
-    // }
-  // });
-
-  $('#artist_profession_tokens').tokenInput($('#artist_profession_tokens').data('professions'),
+ 
+$('.artist_professions').tokenInput($('.artist_professions').data('professions'),
     {
      theme             : "facebook",
      preventDuplicates : true,
-     prePopulate       : $('#artist_profession_tokens').data('pre')
+     prePopulate       : $('.artist_professions').data('pre')
     }
   );
 
+$('.artist_country').tokenInput('/countries',
+    {
+      theme            : "artist-country",
+      tokenLimit       : 1,
+      prePopulate      : $('.artist_country').data('pre'),
+      searchDelay      : 200,
+      hintText         : "Digite para buscar",
+      noResultsText    : "Sem resultados",
+      searchingText    : "Buscando...",
+      resultsFormatter : function(item){
+        return "<li><img src='" + item.url_16 + "' /> &nbsp; " + item.name + "</li>";
+      },
+      tokenFormatter   : function(item){
+        return "<li><p><img src='" + item.url_16 + "' /> &nbsp; " + item.name + "</p></li>"; 
+      }      
+      
+    });
+
+  
 });
 
 // };

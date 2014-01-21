@@ -2,7 +2,7 @@
     <div class="form-group">
       <%= f.label :name, "Nome Artístico", class: "col-sm-3 control-label" %>
       <div class="col-sm-7">
-        <%= f.text_field :name, placeholder: "nickname", class: "form-control input-sm fill" %>
+        <%= f.text_field :name, placeholder: "nickname", class: "form-control input-sm fill", required: true %>
       </div>
     </div>
 
@@ -16,14 +16,12 @@
     <div class="form-group">
       <%= f.label :height, "Estatura", class: "col-sm-3 control-label" %>
       <div class="col-sm-3 input-group">
-        <%= f.number_field :height, class: "form-control input-sm fill text-
-        right" %><span class="input-group-addon">cm</span>
+        <%= f.number_field :height, class: "form-control input-sm fill text-right" %><span class="input-group-addon">cm</span>
       </div>
       <%= f.label :country_id, "País", class: "col-sm-1 control-label" %>
       <div class="col-sm-3">
         <%#= f.text_field :country, class: "form-control fill", data: {countries: @countries}, placeholder: "Digite para buscar..." %>
-        <%= f.hidden_field :country_id, class: "form-control", data: {source:
-        countries_path, option: (@artist.country.name if @artist.country), flag: (@artist.country.url_16 if @artist.country)}, value: (@artist.country.id if @artist.country) %>
+        <%= f.text_field :country_id, class: "artist_country", data: {pre: Array.new(1, @artist.country.as_json(only: [:id, :name], methods: :url_16))} %>
       </div>
     </div>
 
@@ -47,8 +45,8 @@
 
     <div class="form-group">
       <%= f.label :profession_tokens, "Atividades", class: "col-sm-3 control-label" %>
-      <div class="col-sm-3 profession">
-        <%= f.text_field :profession_tokens, class: "form-control fill", data: {professions: Profession.all.as_json(only: [:id, :name]), pre: @artist.professions.as_json(only: [:id, :name])} %>
+      <div class="col-sm-3">
+        <%= f.text_field :profession_tokens, class: "form-control artist_professions", data: {professions: Profession.all.as_json(only: [:id, :name]), pre: @artist.professions.as_json(only: [:id, :name])} %>
       </div>
     </div>
 

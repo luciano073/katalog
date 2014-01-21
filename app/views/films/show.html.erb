@@ -1,13 +1,13 @@
 <div class="row">
   
-  <div class="col-sm-3">
+  <section class="col-sm-3 poster">
     <%= link_to(@film.poster_url(:normal), data: {lightbox: "poster"}, title: normalize_title(@film.brazilian_title)) do %>
       <% image_tag @film.poster_url(:medium), class: "img-thumbnail" %>
     <% end %>
-  </div>
+  </section>
   <div class="col-sm-9">
     <h3 class="text-center">
-      <strong><%= @film.id %> - <%= normalize_title(@film.brazilian_title) %></strong>
+      <strong><%= normalize_title(@film.brazilian_title) %></strong>
       <small><%= "(#{@film.release.year})" if @film.release%></small>
     </h3>
     
@@ -15,80 +15,61 @@
       <small class="original-name"> " <%= normalize_title(@film.title) %> "</small>&nbsp;
       <%= image_tag( @film.country.flag.url(:_16), title: @film.country.name) if @film.country %>
     </p>
+
+    <table id="film-data" class="table table-borderless">
+      <colgroup>
+        <col width="130">
+        <col>
+      </colgroup>
+      <tr>
+        <td class="text-right"><strong>Lançamento:</strong></td>
+        <td><%= @film.release.to_s(:br_ordinal) if @film.release%></td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Gênero:</strong></td>
+        <td><%= @film.genre %></td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Duração:</strong></td>
+        <td><%= "#{@film.length} minutos" if @film.length and not @film.length.empty? %></td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Direção:</strong></td>
+        <td><%= @film.directors.map(&:name).join(", ") unless @film.directors.empty? %></td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Roteiro:</strong></td>
+        <td><%= @film.writers.map(&:name).join(", ") unless @film.writers.empty? %></td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Sinopse:</strong></td>
+        <td><%= @film.synopse %></td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Elenco:</strong></td>
+        <td><%= @film.cast.map(&:name).join(", ").truncate(67, separator: ' ') unless @film.cast.empty? %></td>
+      </tr>
+    </table>
         
-      <section class="row show-profile">
-        <div class="col-sm-3">
-          <% if @film.release %>
-            <p class="text-right"><strong>Release:</strong></p>
-          <% end %>
-          
-          <% if @film.genre and not @film.genre.empty? %>    
-            <p class="text-right"><strong>Genero:</strong></p>
-          <% end %> 
 
-          <% if @film.length and not @film.length.empty? %>    
-            <p class="text-right"><strong>Duração:</strong></p>
-          <% end %> 
+    <% unless @film.cast.empty? %>
+      <ul id="film_cast" class="bxslider">
+        <% @film.cast.each do |a| %>
+          <li>
+            <%= link_to(image_tag(a.photo_url(:thumb), title: a.name, class: "img-thumbnail"), a) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
 
-          <% unless @film.directors.empty? %>
-            <p class="text-right"><strong>Direção:</strong></p>
-          <% end %>
-          <% unless @film.writers.empty? %>    
-            <p class="text-right"><strong>Roteiro:</strong></p>
-          <% end %> 
-          <% unless @film.synopse.empty? %>
-            <p class="text-right"><strong>Synopse:</strong></p>
-          <% end %>
-          <% unless @film.cast.empty? %>
-            <p class="text-right"><strong>Elenco:</strong></p>
-          <% end %>
-        </div>
-
-
-        <div class="col-sm-9 show-profile-right-side">
-          <% if @film.release %> 
-            <p><%= @film.release.to_s(:br_date) %></p>
-          <% end %>
-          <% if @film.genre and not @film.genre.empty? %>
-            <p><%= @film.genre %></p>
-          <% end %>
-          <% if @film.length and not @film.length.empty?%>    
-            <p><%= "#{@film.length} minutos" %></strong></p>
-          <% end %> 
-          <% unless @film.directors.empty? %>
-            <p><%= @film.directors.map(&:name).join(", ") %></p>
-          <% end %>
-          <% unless @film.writers.empty? %>
-            <p><%= @film.writers.map(&:name).join(", ") %></p>
-          <% end %>
-          <% unless @film.synopse.empty? %>
-            <p><%= @film.synopse %></p>
-          <% end %>
-          <% unless @film.cast.empty? %>
-            <p><%= @film.cast.map(&:name).join(", ").truncate(67, separator: ' ') %></p>
-          <% end %>
-
-          
-        </div>
-      </section>
-      <% unless @film.cast.empty? %>
-        <ul id="film_cast" class="bxslider">
-          <% @film.cast.each do |a| %>
-            <li>
-              <%= link_to(image_tag(a.photo_url(:thumb), title: a.name, class: "img-thumbnail"), a) %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-
-      <div class="row">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-          <%= link_to 'Editar', edit_film_path(@film), class: "btn btn-default btn-xs" %> |
-          <%= link_to 'Voltar', films_path, class: "btn btn-default btn-xs" %>
-        </div>
-        <div class="col-sm-4"></div>
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <%= link_to 'Editar', edit_film_path(@film), class: "btn btn-default btn-xs" %> |
+        <%= link_to 'Voltar', films_path, class: "btn btn-default btn-xs" %>
       </div>
+      <div class="col-sm-4"></div>
+    </div>
   </div>
 
   
