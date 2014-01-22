@@ -9,30 +9,20 @@ class Film < ActiveRecord::Base
   
   after_initialize do
     self.release = self.release.to_s(:br_date) if self.release
-    self.cast_ids ||= self.cast.map(&:id)
-    self.writer_ids ||= self.writers.map(&:id)
-    self.director_ids ||= self.directors.map(&:id)
+    self.cast_ids = self.cast.map(&:id)
+    self.writer_ids = self.writers.map(&:id)
+    self.director_ids = self.directors.map(&:id)
     self.cast_has_changed = false
     self.writers_has_changed = false
     self.directors_has_changed = false
     
-    if self.new_record?
-      self.cast_has_changed = true
-      self.writers_has_changed = true
-      self.directors_has_changed = true
-      self.cast_ids = []
-      self.director_ids = []
-      self.writer_ids = []
-    end
-    
+
     if not self.artist_ids.empty? and self.cast.empty? and self.writers.empty? and self.directors.empty?
       self.cast_ids += self.artist_ids      
     end
   end
 
   before_save :set_production_team, on: [:create, :update], if: :production_team_has_changed?
-  # before_save :set_production_team, on: [:create, :update], if: :writers_has_changed?
-  # before_save :set_production_team, on: [:create, :update], if: :directors_has_changed?
   before_save :bd_title, on: [:create, :update]
 
   mount_uploader :poster, PosterUploader #Gem carrierwave
@@ -63,7 +53,7 @@ class Film < ActiveRecord::Base
   end
 
   def production_team_has_changed?
-    if self.cast_has_changed or self.writers_has_changed or self.directors_has_changed
+    if self.cast_has_changed or self.writers_has_changed or self.directors_has_changed or self.new_record?
       return true
     else
       return false
