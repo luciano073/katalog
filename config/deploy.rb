@@ -30,7 +30,7 @@ namespace :deploy do
   desc "Cria link para database.yml"
   task :symlink_database_yml do
     run "rm #{release_path}/config/database.yml"
-    run "ln -sfn #{shared_path}/config/database.yml #{current_path}/config/database.yml"
+    run "ln -sfn #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 
   desc "Reload the database with seed data"
@@ -38,5 +38,12 @@ namespace :deploy do
     run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=production"
   end
 end
+after "deploy:finalize_update", "deploy:symlink_database_yml"
 
+namespace :carrierwave do
+  task :symlink, roles: :app do
+    run "ln -nfs #{shared_path}/uploads/ #{release_path}/public/uploads"
+  end
+  after "deploy:finalize_update", "carrierwave:symlink"
+end
 
