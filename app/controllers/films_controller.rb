@@ -43,6 +43,12 @@ class FilmsController < ApplicationController
     # render text: params
     # render text: params[:film]
     @film = Film.new(film_params)
+    @film.cast_tokens = params[:film][:cast_tokens]         # force to call
+    @film.writer_tokens = params[:film][:writer_tokens]     # methods _tokens
+    @film.director_tokens = params[:film][:director_tokens] # for new records
+    # As tres atribuicoes acima sao para forcar a chamada aos respectivos meto-
+    # dos que nao estavam sendo chamados quando da criacao de novos filmes.
+
     # render inline: "<%= @film.production_team.inspect %>"
     respond_to do |format|
       if @film.save
