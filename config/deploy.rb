@@ -41,3 +41,17 @@ end
 # after "deploy:finalize_update", "deploy:symlink_database_yml"
 
 
+namespace :carrierwave do
+  task :cp_uploads do
+    run "cp -ru #{current_path}/public/uploads #{shared_path}/" 
+  end
+  before "deploy:update", "carrierwave:cp_uploads"
+
+  task :symlink, roles: :app do
+    # run "cp -ru #{current_path}/public/uploads #{shared_path}/"
+    run "rm -rf #{release_path}/public/uploads"
+    run "ln -nfs #{shared_path}/uploads/ #{release_path}/public/uploads"
+  end
+  after "deploy:finalize_update", "carrierwave:symlink"
+end
+
