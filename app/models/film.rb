@@ -1,19 +1,20 @@
 class Film < ActiveRecord::Base
-  attr_reader :cast_tokens
-  attr_reader :director_tokens
-  attr_reader :writer_tokens
-  attr_reader :poster_cache
-  attr_accessor :cast_ids, :writer_ids, :director_ids
-  attr_accessor :cast_has_changed, :writers_has_changed, :directors_has_changed
-  # @cast_has_changed, @writers_has_changed, @directors_has_changed = false
-  
+  attr_reader              :poster_cache
+  attr_reader              :cast_ids, :writer_ids, :director_ids
+  attr_accessor            :cast_has_changed, :writers_has_changed, :directors_has_changed
+  mount_uploader           :poster, PosterUploader #Gem carrierwave
+  has_many                 :production_team, dependent: :destroy
+  has_many                 :artists, :through => :production_team
+  belongs_to               :country
+  scope                    :random, -> {order('random()')}
+
   after_initialize do
-    self.release = self.release.to_s(:br_date) if self.release
-    self.cast_ids = self.cast.map(&:id)
-    self.writer_ids = self.writers.map(&:id)
-    self.director_ids = self.directors.map(&:id)
-    self.cast_has_changed = false
-    self.writers_has_changed = false
+    self.release               = self.release.to_s(:br_date) if self.release
+    @cast_ids                  = self.cast.map(&:id)
+    @writer_ids                = self.writers.map(&:id)
+    @director_ids              = self.directors.map(&:id)
+    self.cast_has_changed      = false
+    self.writers_has_changed   = false
     self.directors_has_changed = false
     
 
@@ -24,18 +25,6 @@ class Film < ActiveRecord::Base
 
   before_save :set_production_team, on: [:create, :update], if: :production_team_has_changed?
   before_save :bd_title, on: [:create, :update]
-
-  mount_uploader :poster, PosterUploader #Gem carrierwave
-  has_many       :production_team, dependent: :destroy
-  has_many       :artists, :through => :production_team
-  belongs_to :country
-
-
-  # has_and_belongs_to_many :prizes, :join_table => "PrizeEdition"
-  # has_and_belongs_to_many :media
-
-  scope :random, -> {order('random()')}
-
   
   def cast
     self.production_team.map { |e| e.artist if e.cast? }.compact
@@ -60,31 +49,45 @@ class Film < ActiveRecord::Base
     end
   end
 
-  def cast_tokens=(ids)
-    unless self.new_record?
-      unless self.cast_ids.map { |e| e.to_s } == ids.split(",")
+  def cast_ids=(ids)
+    if not self.new_record? and @cast_ids
+      unless @cast_ids.map { |e| e.to_s } == ids.split(",")
         self.cast_has_changed = true    
       end
     end
-    self.cast_ids = ids.split(",")
+    if ids.kind_of? String
+      @cast_ids = ids.split(",")
+    else
+      @cast_ids = ids
+    end
+    
   end
 
-  def director_tokens=(ids)
-    unless self.new_record?
-      unless self.director_ids.map { |e| e.to_s } == ids.split(",")
+  def director_ids=(ids)
+    if not self.new_record? and @director_ids
+      unless @director_ids.map { |e| e.to_s } == ids.split(",")
         self.directors_has_changed = true
       end
     end
-    self.director_ids = ids.split(",")
+    if ids.kind_of? String
+      @director_ids = ids.split(",")
+    else
+      @director_ids = ids
+    end
   end
 
-  def writer_tokens=(ids)
-    unless self.new_record?  
-      unless self.writer_ids.map { |e| e.to_s } == ids.split(",")
+  def writer_ids=(ids)
+    if not self.new_record? and @writer_ids 
+      unless @writer_ids.map { |e| e.to_s } == ids.split(",")
         self.writers_has_changed = true    
       end
     end
-    self.writer_ids = ids.split(",")
+    if ids.kind_of? String
+      @writer_ids = ids.split(",")
+    else
+      @writer_ids = ids
+    end
+    
   end
 
   def self.search(search)
@@ -123,17 +126,21 @@ class Film < ActiveRecord::Base
   def bd_title
     # re = /^[ao]s?n?\s+|^the\s+|^u[mn]a?s?\s+/i
     re = Regexp.new('^[ao]s?[[:blank:]]+|^the[[:blank:]]+|\Aan[[:blank:]]+|^u[mn]a?s?\s+', true)
+    re_t = /\s+[ixv]{,3}\z/i # for titles with II, III and so on
     if self.brazilian_title
-      self.brazilian_title = self.brazilian_title.strip.squeeze('
-        ').nome_proprio
+      self.brazilian_title = self.brazilian_title.strip.squeeze(' ').nome_proprio
       str = self.brazilian_title.sub(re, '')
       self.brazilian_title = str + ", #{Regexp.last_match.to_s.sub(/\s/, '')}" if
       Regexp.last_match
+      str =~ re_t
+      self.brazilian_title = self.brazilian_title.sub(re_t, $~.to_s.upcase)
     end
     if self.title
       self.title = self.title.strip.squeeze(' ').titleize
       str = self.title.sub(re, '')
       self.title = str + ", #{$~.to_s.sub(/\s/, '')}" if $~
+      str =~ re_t
+      self.title = self.title.sub(re_t, $~.to_s.upcase)
     end
     
   end

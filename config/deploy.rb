@@ -45,7 +45,7 @@ namespace :carrierwave do
   task :cp_uploads do
     run "cp -ru #{current_path}/public/uploads #{shared_path}/" 
   end
-  before "deploy:update", "carrierwave:cp_uploads"
+  # before "deploy:update", "carrierwave:cp_uploads"
 
   task :symlink, roles: :app do
     # run "cp -ru #{current_path}/public/uploads #{shared_path}/"

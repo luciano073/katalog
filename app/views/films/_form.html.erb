@@ -47,23 +47,23 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :director_tokens, "Diretores", class: "col-sm-3 control-label" %>
+    <%= f.label :director_ids, "Diretores", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
-      <%= f.text_field :director_tokens, class: "form-control directors", data:
+      <%= f.text_field :director_ids, class: "form-control directors", data:
       {pre: @film.directors.as_json(only: [:id, :name])} %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :writer_tokens, "Roteiristas", class: "col-sm-3 control-label" %>
+    <%= f.label :writer_ids, "Roteiristas", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
-      <%= f.text_field :writer_tokens, class: "form-control writers", data: {pre:
+      <%= f.text_field :writer_ids, class: "form-control writers", data: {pre:
         @film.writers.as_json(only: [:id, :name])} %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :cast_tokens, "Elenco", class: "col-sm-3 control-label" %>
+    <%= f.label :cast_ids, "Elenco", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
-      <%= f.text_field :cast_tokens, class: "form-control cast", data: {pre: 
+      <%= f.text_field :cast_ids, class: "form-control cast", data: {pre: 
         @film.cast.as_json(only: [:id, :name])} %>
     </div>
   </div>
