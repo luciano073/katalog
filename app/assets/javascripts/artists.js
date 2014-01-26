@@ -5,7 +5,7 @@
 
 // var ready;
 // ready = function() {
-jQuery(function() {
+jQuery(document).ready(function($) {
   $('span.tip').tooltip();
   $('input#artist_height').setMask({ mask: '299'});
 
@@ -35,6 +35,20 @@ $('.artist_country').tokenInput('/countries',
       }      
       
     });
+
+  $('#artist-films').bxSlider({
+    auto            : true,
+    // autoControls : true,
+    // captions     : true,
+    controls        : false,
+    autoHover       : true,
+    minSlides       : 1,
+    maxSlides       : 4,
+    speed           : 3000,
+    slideMargin     : 10,
+    moveSlides      : 1,
+    slideWidth      : 130
+  });
 
   
 });

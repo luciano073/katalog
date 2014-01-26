@@ -43,16 +43,16 @@ class FilmsController < ApplicationController
     # render text: params
     # render text: params[:film]
     @film = Film.new(film_params)
-    @film.cast_ids = params[:film][:cast_ids]         # force to call
-    @film.writer_ids = params[:film][:writer_ids]     # methods _ids
-    @film.director_ids = params[:film][:director_ids] # for new records
+    # @film.cast_ids = params[:film][:cast_ids]         # force to call
+    # @film.writer_ids = params[:film][:writer_ids]     # methods _ids
+    # @film.director_ids = params[:film][:director_ids] # for new records
     # As tres atribuicoes acima sao para forcar a chamada aos respectivos meto-
     # dos que nao estavam sendo chamados quando da criacao de novos filmes.
 
     # render inline: "<%= @film.production_team.inspect %>"
     respond_to do |format|
       if @film.save
-        format.html { redirect_to @film, notice: 'Film was successfully created.' }
+        format.html { redirect_to @film, notice: 'Filme foi criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @film }
       else
         format.html { render action: 'new' }
@@ -66,7 +66,7 @@ class FilmsController < ApplicationController
   def update
     respond_to do |format|
       if @film.update(film_params)
-        format.html { redirect_to @film, notice: 'Film was successfully updated.' }
+        format.html { redirect_to @film, notice: 'Filme foi atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -94,78 +94,27 @@ class FilmsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
       params.require(:film).permit(:title, :brazilian_title, :release, :synopse, :poster, :genre,
-        :cast_ids, :writer_ids, :director_ids, :poster_cache, :country_id, :length)
+        :cast_ids, :writer_ids, :director_ids, :poster_cache, :country_id, :length, :remove_poster)
     end
 
-    # def set_production_team
-    #   directors = []
-    #   writers = []
-    #   cast = []
-    #   params.each do |k,v|
-    #     if v.is_a?(Hash)
-    #       str = v.delete(:director_tokens)
-    #       directors = str.split(',') unless str.blank?
-    #       str = v.delete(:writer_tokens)
-    #       writers = str.split(',') unless str.blank?
-    #       str = v.delete(:cast_tokens)
-    #       cast = str.split(',') unless str.blank?
-    #     end
-    #   end
-
-    
-    #   if params[:action] == 'update'
-    #     @film = Film.find(params[:id])
-    #     @film.production_team.clear
-    #     unless directors.empty?
-    #       directors.each do |d|
-    #         @film.production_team.build(artist_id: d.to_i, director: true)
-    #       end
-    #     end
-
-    #     unless writers.empty?
-    #       writers.each do |w|
-    #         @film.production_team.build(artist_id: w.to_i, writer: true)
-    #       end
-    #     end
-
-    #     unless cast.empty?
-    #       cast.each do |c|
-    #         @film.production_team.build(artist_id: c.to_i, cast: true)
-    #       end
-    #     end
-
-    #   else
-    #     @film = Film.new(film_params)
-    #     unless directors.empty?
-    #       directors.each do |d|
-    #         @film.production_team.build(artist_id: d.to_i, director: true)
-    #       end
-    #     end
-
-    #     unless writers.empty?
-    #       writers.each do |w|
-    #         @film.production_team.build(artist_id: w.to_i, writer: true)
-    #       end
-    #     end
-
-    #     unless cast.empty?
-    #       cast.each do |c|
-    #         @film.production_team.build(artist_id: c.to_i, cast: true)
-    #       end
-    #     end
-
-    #   end
-              
-    # end
 
     def genres_list
-      @genres = {
-                  "Ação/Aventura" => "Ação/Aventura",
-                  "Comédia"       => "Comédia",
-                  "Drama"         => "Drama",
-                  "Terror"        => "Terror",
-                  "Animação"      => "Animação",
-                  "Ficção"        => "Ficção"
-                }.sort
+      # @genres = {
+      #             "Ação/Aventura" => "Ação/Aventura",
+      #             "Comédia"       => "Comédia",
+      #             "Drama"         => "Drama",
+      #             "Terror"        => "Terror",
+      #             "Animação"      => "Animação",
+      #             "Ficção"        => "Ficção"
+      #           }.sort
+      @genres = [
+        {id: 1, name: "Ação"},
+        {id: 2, name: "Aventura"},
+        {id: 3, name: "Drama"},
+        {id: 4, name: "Animação"},
+        {id: 5, name: "Comédia"},
+        {id: 6, name: "Ficção"},
+        {id: 7, name: "Terror"}
+      ]
     end
 end

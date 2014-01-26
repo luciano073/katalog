@@ -1,4 +1,5 @@
-jQuery(function() {
+jQuery(document).ready(function($) {
+
   $('input.directors').tokenInput('/artists/directors.json',
     {
       theme             : "facebook",
@@ -54,6 +55,16 @@ jQuery(function() {
       
     });
 
+  $('.film_genre').tokenInput($('.film_genre').data('genres'), {
+    // theme             : "film-country",
+    // hintText          : "Digite para buscar",
+    // noResultsText     : "Sem resultados",
+    // searchingText     : "Buscando...",
+    // tokenValue        : "name",
+    tokenDelimiter    : "/",
+    preventDuplicates : true
+  });
+
   $('#film_cast').bxSlider({
     auto            : true,
     // autoControls : true,
@@ -68,4 +79,5 @@ jQuery(function() {
     slideWidth      : 130
   });
 
+  // $('input#film-release').setMask('date');
 });

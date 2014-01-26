@@ -9,7 +9,10 @@
         <span class="icon-bar"></span>
       </button>
       <%#= link_to "KataLog", root_path, class: "navbar-brand" %>
-      <%= link_to "KataLog", root_path, class: "navbar-brand" %>
+      <%= link_to root_path, class: "navbar-brand", id: 'home' do %>
+        <span class="glyphicon glyphicon-home"></span> KATALOG
+      <% end -%>
+      <%#= link_to "KataLog", root_path, class: "navbar-brand #{'active' if params[:controller] == 'welcome'}" %>
       <!-- <a class="navbar-brand" href="#">Project name</a> -->
     </div>
     <div class="navbar-collapse collapse">

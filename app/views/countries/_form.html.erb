@@ -1,4 +1,4 @@
-<%= form_for(@country) do |f| %>
+<%= form_for(@country, html: {multipart: true}) do |f| %>
   <% if @country.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@country.errors.count, "error") %> prohibited this country from being saved:</h2>
@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :flag %><br>
-    <%= f.text_field :flag %>
+    <%= f.file_field :flag %>
   </div>
   <div class="actions">
     <%= f.submit %>

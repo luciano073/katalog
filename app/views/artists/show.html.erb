@@ -1,72 +1,73 @@
+<% content_for :title, navigation %>
 <div class="row">
   
-  <div class="col-sm-3">
+  <section id="artist-photo" class="col-sm-3">
     <%= link_to(@artist.photo_url(:normal), data: {lightbox: "photo"}, title:
     @artist.name) do %>
       <% image_tag @artist.photo_url(:medium).to_s, class: "img-thumbnail" %>
     <% end %>
-  </div>
-  <div class="col-sm-9">
-    
-   
+  </section>
+  <section id="artist-profile" class="col-sm-9">
+       
     <h3 class="text-center"><%= @artist.name %> </h3>
    
     <p class="text-center art-real-name">
-      <small class="original-name">" <%= @artist.real_name %>"</small>&nbsp; <%= image_tag(
-      @artist.country.flag.url(:_16), title: @artist.country.name) if @artist.country%>
+      <small class="original-name">" <%= @artist.real_name %>"</small>&nbsp; <%= image_tag(@artist.country.flag.url(:_16), title: @artist.country.name) if @artist.country%>
     </p>
     <% if @artist.death %>
       <p class="text-center">
         <small><%= "(#{@artist.birthday.to_s(:br_date)} - #{@artist.death.to_s(:br_date)})" %></small>
+
       </p>      
     <% end %>   
     
-<section class="row show-profile">
-  <div class="col-sm-3">
-    <% if @artist.birthday and not @artist.death %>
-      <p class="text-right"><strong>Nascimento:</strong></p>
-    <% end %>
-    <% unless @artist.height.empty? %>
-      <p class="text-right"><strong>Estatura:</strong></p>
-    <% end %>
-    <% unless @artist.professions.empty? %>
-      <p class="text-right"><strong>Atividades:</strong></p>
-    <% end %>
+    <table id="artist-data" class="table table-borderless">
+      <colgroup>
+        <col width="130">
+        <col>
+      </colgroup>
+      <tr>
+        <td class="text-right"><strong>Nascimento:</strong></td>
+        <td>
+          <% if @artist.birthday and not @artist.death %>
+            <%= @artist.birthday.to_s(:br_date) %>&nbsp;
+            <%= "(#{Date.today.year - @artist.birthday.year})" %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Estatura:</strong></td>
+        <td><%= "#{@artist.height} cm" if @artist.height%></td>
+      </tr>      
+      <tr>
+        <td class="text-right"><strong>Atividades:</strong></td>
+        <td><%= @artist.professions.map(&:name).join(", ") unless @artist.professions.empty? %></td>
+      </tr>
+      <tr>
+        <td class="text-right"><strong>Produções:</strong></td>
+        <td><%= @artist.films.map {|e| normalize_title(e.brazilian_title)}.uniq.join(", ") unless @artist.films.empty? %></td>
+      </tr>      
+    </table>
+
     <% unless @artist.films.empty? %>
-      <p class="text-right"><strong>Produções:</strong></p>
+      <ul id="artist-films" class="bxslider">
+        <% @artist.films.uniq.each do |f| %>
+          <li>
+            <%= link_to(image_tag(f.poster_url(:thumb), title: f.brazilian_title, class: "img-thumbnail"), f) %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
+
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <%= link_to 'Edit', edit_artist_path(@artist) %> |
+        <%= link_to 'Back', artists_path %>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
     
-  </div>
-
-  <div class="col-sm-9 show-profile-right-side">
-    
-    <% if @artist.birthday and !@artist.death %>
-
-      <p>
-        <%= @artist.birthday.to_s(:br_date) %>&nbsp;
-        <%= "(#{Date.today.year - @artist.birthday.year})" %>
-      </p>
-
-    <% end %>
-            
-    <% unless @artist.height.empty? %>
-      <p>
-        <%= "#{@artist.height} cm"%>
-      </p>
-    <% end %>
-    <% unless @artist.professions.empty? %>
-      <p> </p>
-    <% end %>
-    <% unless @artist.films.empty? %>
-      <p></p>
-    <% end %>
-    
-  </div>
-  
-</section>
-    <%= link_to 'Edit', edit_artist_path(@artist) %> |
-    <%= link_to 'Back', artists_path %>
-
-  </div>
+  </section>
 
 </div>

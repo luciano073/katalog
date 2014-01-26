@@ -20,14 +20,16 @@
       <div class="row">
 
         <section id="sidebar" class="col-md-3 side">
-          <p><%= link_to "About Us", "#href", class: "btn btn-xs btn-default"  %></p>
+          <%= render 'layouts/sidebar' %>
         </section>
         <section id="content" class="col-md-9 main" data-no-turbolink>
           <% if notice %>
           <section id="notifications" class="alert alert-success">
+            <span class="glyphicon glyphicon-saved"></span>
             <%= notice %>
           </section>
           <% end %>
+
           <%= yield %>
         </section>
       </div>

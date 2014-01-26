@@ -78,7 +78,7 @@ class ArtistsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def artist_params
     params.require(:artist).permit(:name, :real_name, :profession_tokens,
-      :birthday, :country_id, :photo, :height, :death)
+      :birthday, :country_id, :photo, :height, :death, :remove_photo)
     # params.require(:film).permit(:artist_tokens)
   end
 

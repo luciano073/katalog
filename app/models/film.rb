@@ -10,9 +10,6 @@ class Film < ActiveRecord::Base
 
   after_initialize do
     self.release               = self.release.to_s(:br_date) if self.release
-    @cast_ids                  = self.cast.map(&:id)
-    @writer_ids                = self.writers.map(&:id)
-    @director_ids              = self.directors.map(&:id)
     self.cast_has_changed      = false
     self.writers_has_changed   = false
     self.directors_has_changed = false
@@ -50,44 +47,33 @@ class Film < ActiveRecord::Base
   end
 
   def cast_ids=(ids)
-    if not self.new_record? and @cast_ids
+    unless self.new_record?
+      @cast_ids = self.cast.map(&:id)
       unless @cast_ids.map { |e| e.to_s } == ids.split(",")
         self.cast_has_changed = true    
       end
-    end
-    if ids.kind_of? String
-      @cast_ids = ids.split(",")
-    else
-      @cast_ids = ids
-    end
-    
+    end   
+    @cast_ids = ids.split(",")    
   end
 
   def director_ids=(ids)
-    if not self.new_record? and @director_ids
+    unless self.new_record?
+      @director_ids = self.directors.map(&:id)
       unless @director_ids.map { |e| e.to_s } == ids.split(",")
         self.directors_has_changed = true
       end
-    end
-    if ids.kind_of? String
-      @director_ids = ids.split(",")
-    else
-      @director_ids = ids
-    end
+    end    
+    @director_ids = ids.split(",")
   end
 
   def writer_ids=(ids)
-    if not self.new_record? and @writer_ids 
+    unless self.new_record?
+      @writer_ids = self.writers.map(&:id) 
       unless @writer_ids.map { |e| e.to_s } == ids.split(",")
         self.writers_has_changed = true    
       end
-    end
-    if ids.kind_of? String
-      @writer_ids = ids.split(",")
-    else
-      @writer_ids = ids
-    end
-    
+    end    
+    @writer_ids = ids.split(",")
   end
 
   def self.search(search)
@@ -136,7 +122,7 @@ class Film < ActiveRecord::Base
       self.brazilian_title = self.brazilian_title.sub(re_t, $~.to_s.upcase)
     end
     if self.title
-      self.title = self.title.strip.squeeze(' ').titleize
+      self.title = self.title.strip.squeeze(' ').nome_proprio
       str = self.title.sub(re, '')
       self.title = str + ", #{$~.to_s.sub(/\s/, '')}" if $~
       str =~ re_t
@@ -144,6 +130,5 @@ class Film < ActiveRecord::Base
     end
     
   end
-
   
 end

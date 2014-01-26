@@ -16,12 +16,13 @@ module ApplicationHelper
     str.prepend("#{$~.to_s.delete(",").lstrip} ")
   end
 
-  # def lessif(options {})
-  #   if "#{options[:model]}.#{options[:attribute]}"
-  #     return "#{options[:form_builder]} #{options[:attr]}, class:'#{options[:class]}'" +
-  #     " #{options[:data]} #{options[:value]}"
-  #   else
-      
-  #   end
-  # end
+  def navigation
+    if controller.action_name =~ /^[en]/
+      base = t controller.controller_name, scope: :controller
+      base << " >#{t controller.action_name, scope: :controller}"
+    else
+      base = t controller.controller_name, scope: :controller
+    end
+    base.html_safe
+  end
 end

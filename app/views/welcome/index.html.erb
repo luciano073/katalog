@@ -1,5 +1,24 @@
-<% provide(:title, "Home") %>
+<% content_for :title, navigation %>
+<section class="film-slider">
+  <% unless @films.empty? %>
+    <ul id="film-slider" class="bxslider">
+      <% @films.each do |f| %>
+        <li>
+          <%= link_to(image_tag(f.poster_url(:thumb), title: normalize_title(f.brazilian_title), class: "img-thumbnail"), f) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
 
-<h1>Hello, Rails!</h1>
-<p><%= link_to "tiny button", "#herf", class: "btn-sm btn-default" %></p>
-<p><%= link_to "tiny button alert radius", "#herf", class: "btn-sm btn-default" %></p>
+<section class="artist-slider">
+  <% unless @artists.empty? %>
+      <ul id="artist-slider" class="bxslider">
+        <% @artists.each do |a| %>
+          <li>
+            <%= link_to(image_tag(a.photo_url(:thumb), title: a.name, class: "img-thumbnail"), a) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+</section>

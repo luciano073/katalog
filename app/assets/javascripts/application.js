@@ -11,21 +11,21 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery-ui
-//= require jquery-ui-extension-accentFolding
+// require jquery-ui
+// require jquery-ui-extension-accentFolding
 //= require jquery_ujs
 //= require bootstrap
 //= require meiomask.min
 //= require jquery.bxslider.min
 //= require lightbox-2.6.min
 //= require jquery.tokeninput
-//= require select2
-//= require select2_locale_pt-BR
+// require select2
+// require select2_locale_pt-BR
 //= require turbolinks
 //= require_tree .
 
 
-jQuery(function () {
+jQuery(document).ready(function($) {
 
   $('input.date').setMask('date'); //Plugin meiomask
 

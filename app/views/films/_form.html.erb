@@ -1,3 +1,4 @@
+<% content_for :title, navigation %>
 <%= form_for(@film, html: {multipart: true, class: "form-horizontal", role: 'form'}) do |f| %>
   <!-- <%# if @film.errors.any? %> -->
     <!-- <div id="error_explanation"> -->
@@ -26,12 +27,12 @@
   <div class="form-group">
     <%= f.label :release, class: "col-sm-3 control-label" %>
     <div class="col-sm-3">
-      <%= f.text_field :release, class: "form-control input-sm date fill" %>
+      <%= f.text_field :release, class: "form-control input-sm date fill text-center" %>
       <%#= f.date_select(:release, {}, class: "small", display: "inline-block") %>
     </div>
-    <%= f.label :genre, "Gênero", class: "col-sm-1 control-label" %>
+    <%= f.label :genre, class: "col-sm-1 control-label" %>
     <div class="col-sm-3">
-      <%= f.select :genre, options_for_select(@genres, @film.genre), {include_blank: true}, class: "form-control input-sm fill"  %>
+      <%= f.text_field :genre, class: "film_genre", data: {genres: @genres.as_json} %>
     </div>
   </div>
   <div class="form-group">
@@ -43,7 +44,7 @@
     <%= f.label :country_id, "País", class: "col-sm-1 control-label" %>
     <div class="col-sm-3">
       <%= f.text_field :country_id, class: "film_country", data: 
-      {pre: Array.new(1, @film.country.as_json(only: [:id, :name], methods: :url_16))}  %>
+      {pre: Array.new(1, @film.country.as_json(only: [:id, :name], methods: :url_16))} %>
     </div>
   </div>
   <div class="form-group">
@@ -83,10 +84,19 @@
       <%= f.hidden_field :poster_cache %>
     </div>
   </div>
+
+  <div class="form-group">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-7">
+      <% if @film.poster? %>
+        <label><%= f.check_box :remove_poster %>Remove poster</label>
+      <% end -%>
+    </div>
+  </div>
   
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-7">
-      <%= f.submit nil, data: {:disable_with => 'Criando...'}, class: "btn btn-default btn-xs" %>
+      <%= f.submit nil, data: {:disable_with => 'Enviando...'}, class: "btn btn-default btn-xs" %>
     </div>
   </div>
 <% end %>

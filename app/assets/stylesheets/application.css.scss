@@ -8,13 +8,14 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require select2
- *= require select2-bootstrap
+ * require select2
+ * require select2-bootstrap
+ * require bootstrap-tokenfield
  *= require token-input-facebook
+ *= require token-input
  *= require jquery-ui
  *= require lightbox
  *= require jquery.bxslider
- * require bootstrap-tokenfield
  *= require_self
  *= require_tree .
  */
@@ -58,5 +59,13 @@ section.show-profile{
 
   .show-profile-right-side{
     padding-left: 1px;
+  }
+}
+
+a#home{
+  font-weight: bolder;
+  color: #EA9618;
+  &:hover{
+    color: #fff;
   }
 }
