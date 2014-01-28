@@ -1,15 +1,15 @@
 class Film < ActiveRecord::Base
-  attr_reader              :poster_cache
-  attr_reader              :cast_ids, :writer_ids, :director_ids
-  attr_accessor            :cast_has_changed, :writers_has_changed, :directors_has_changed
-  mount_uploader           :poster, PosterUploader #Gem carrierwave
-  has_many                 :production_team, dependent: :destroy
-  has_many                 :artists, :through => :production_team
-  belongs_to               :country
-  scope                    :random, -> {order('random()')}
+  attr_reader      :poster_cache
+  attr_reader      :cast_ids, :writer_ids, :director_ids
+  attr_accessor    :cast_has_changed, :writers_has_changed, :directors_has_changed
+  mount_uploader   :poster, PosterUploader #Gem carrierwave
+  has_many         :production_team, dependent: :destroy
+  has_many         :artists, :through => :production_team
+  belongs_to       :country
+  scope            :random, -> {order('random()')}
 
   after_initialize do
-    self.release               = self.release.to_s(:br_date) if self.release
+    self.release               = I18n.l self.release if self.release
     self.cast_has_changed      = false
     self.writers_has_changed   = false
     self.directors_has_changed = false
@@ -23,6 +23,14 @@ class Film < ActiveRecord::Base
   before_save :set_production_team, on: [:create, :update], if: :production_team_has_changed?
   before_save :bd_title, on: [:create, :update]
   
+  def genre_asjson
+    self.genre.split('|').map { |e| {name: e} }.as_json if self.genre
+  end
+
+  def genre
+    self[:genre].gsub('|', ' | ') #sobrescreve read_method default
+  end
+
   def cast
     self.production_team.map { |e| e.artist if e.cast? }.compact
     # cast.map(&:name).join(", ") unless cast.empty?
@@ -78,7 +86,7 @@ class Film < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('i_unaccent(films.brazilian_title) ILIKE i_unaccent(?)', "%#{search}%")
+      where('i_unaccent(films.brazilian_title) LIKE i_unaccent(?)', "%#{search}%")
     else
       self.all
     end

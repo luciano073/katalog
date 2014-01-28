@@ -6,19 +6,22 @@
 // var ready;
 // ready = function() {
 jQuery(document).ready(function($) {
+
   $('span.tip').tooltip();
+
   $('input#artist_height').setMask({ mask: '299'});
+  $('input.date').setMask('date');
 
  
-$('.artist_professions').tokenInput($('.artist_professions').data('professions'),
-    {
-     theme             : "facebook",
-     preventDuplicates : true,
-     prePopulate       : $('.artist_professions').data('pre')
-    }
-  );
+  $('.artist_professions').tokenInput($('.artist_professions').data('professions'),
+      {
+       theme             : "facebook",
+       preventDuplicates : true,
+       prePopulate       : $('.artist_professions').data('pre')
+      }
+    );
 
-$('.artist_country').tokenInput('/countries',
+  $('.artist_country').tokenInput('/countries',
     {
       theme            : "artist-country",
       tokenLimit       : 1,

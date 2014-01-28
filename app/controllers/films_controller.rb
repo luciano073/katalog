@@ -99,14 +99,6 @@ class FilmsController < ApplicationController
 
 
     def genres_list
-      # @genres = {
-      #             "Ação/Aventura" => "Ação/Aventura",
-      #             "Comédia"       => "Comédia",
-      #             "Drama"         => "Drama",
-      #             "Terror"        => "Terror",
-      #             "Animação"      => "Animação",
-      #             "Ficção"        => "Ficção"
-      #           }.sort
       @genres = [
         {id: 1, name: "Ação"},
         {id: 2, name: "Aventura"},
@@ -114,7 +106,13 @@ class FilmsController < ApplicationController
         {id: 4, name: "Animação"},
         {id: 5, name: "Comédia"},
         {id: 6, name: "Ficção"},
-        {id: 7, name: "Terror"}
-      ]
+        {id: 7, name: "Terror"},
+        {id: 8, name: "Faroeste"},
+        {id: 9, name: "Suspense"},
+        {id: 10, name: "Policial"},
+        {id: 11, name: "Romance"},
+        {id: 12, name: "Guerra"},
+        {id: 13, name: "Fantasia"}
+      ].sort_by {|e| e[:name]}
     end
 end

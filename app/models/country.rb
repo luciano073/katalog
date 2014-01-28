@@ -9,7 +9,7 @@ class Country < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where("i_unaccent(#{self.table_name}.name) ILIKE i_unaccent(?)", "%#{search}%")
+      where("i_unaccent(#{self.table_name}.name) LIKE i_unaccent(?)", "%#{search}%")
     else
       self.all
     end

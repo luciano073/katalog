@@ -1,10 +1,13 @@
 jQuery(document).ready(function($) {
 
+  $('#film_release').setMask('date');
+
   $('input.directors').tokenInput('/artists/directors.json',
     {
       theme             : "facebook",
       prePopulate       : $('input.directors').data('pre'),
       preventDuplicates : true,
+      animateDropdown   : false,
       minChars          : 2,
       searchDelay       : 200,
       hintText          : "Digite para buscar",
@@ -17,6 +20,7 @@ jQuery(document).ready(function($) {
       theme             : "facebook",
       prePopulate       : $('input.writers').data('pre'),
       preventDuplicates : true,
+      animateDropdown   : false,
       minChars          : 2,
       searchDelay       : 200,
       hintText          : "Digite para buscar",
@@ -29,12 +33,25 @@ jQuery(document).ready(function($) {
       theme             : "facebook",
       prePopulate       : $('input.cast').data('pre'),
       preventDuplicates : true,
+      animateDropdown   : false,
       minChars          : 2,
       searchDelay       : 200,
       hintText          : "Digite para buscar",
       noResultsText     : "Sem resultados",
       searchingText     : "Buscando..."
+    });
 
+  $('.film_genre').tokenInput($('.film_genre').data('genres'), {
+      theme             : "film-genre",
+      hintText          : "Digite para buscar",
+      noResultsText     : "Sem resultados",
+      searchingText     : "Buscando...",
+      searchDelay       : 10,
+      prePopulate       : $('.film_genre').data('pre'),
+      animateDropdown   : false,
+      tokenValue        : "name",
+      tokenDelimiter    : "|",
+      preventDuplicates : true
     });
 
   $('.film_country').tokenInput('/countries',
@@ -43,6 +60,7 @@ jQuery(document).ready(function($) {
       tokenLimit       : 1,
       prePopulate      : $('.film_country').data('pre'),
       searchDelay      : 200,
+      animateDropdown  : false,
       hintText         : "Digite para buscar",
       noResultsText    : "Sem resultados",
       searchingText    : "Buscando...",
@@ -54,16 +72,6 @@ jQuery(document).ready(function($) {
       }      
       
     });
-
-  $('.film_genre').tokenInput($('.film_genre').data('genres'), {
-    // theme             : "film-country",
-    // hintText          : "Digite para buscar",
-    // noResultsText     : "Sem resultados",
-    // searchingText     : "Buscando...",
-    // tokenValue        : "name",
-    tokenDelimiter    : "/",
-    preventDuplicates : true
-  });
 
   $('#film_cast').bxSlider({
     auto            : true,
@@ -79,5 +87,5 @@ jQuery(document).ready(function($) {
     slideWidth      : 130
   });
 
-  // $('input#film-release').setMask('date');
+  
 });

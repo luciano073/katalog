@@ -3,8 +3,8 @@ class Artist < ActiveRecord::Base
 
   before_save :name_normalize
   after_find do
-    self.birthday = self.birthday.to_s(:br_date) if self.birthday
-    self.death = self.death.to_s(:br_date) if self.death
+    self.birthday = I18n.l self.birthday if self.birthday
+    self.death = I18n.l self.death if self.death
   end
 	
   has_and_belongs_to_many :professions
@@ -26,7 +26,7 @@ class Artist < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where("i_unaccent(#{self.table_name}.name) ILIKE i_unaccent(?)", "%#{search}%")
+      where("i_unaccent(#{self.table_name}.name) LIKE i_unaccent(?)", "%#{search}%")
     else
       self.all
     end

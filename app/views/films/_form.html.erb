@@ -21,20 +21,21 @@
   <div class="form-group">
     <%= f.label :brazilian_title, class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
-      <%= f.text_field :brazilian_title, class: "form-control input-sm fill" %>
+      <%= f.text_field :brazilian_title, class: "form-control input-sm fill", required: true %>
     </div>
   </div>
+
   <div class="form-group">
     <%= f.label :release, class: "col-sm-3 control-label" %>
     <div class="col-sm-3">
-      <%= f.text_field :release, class: "form-control input-sm date fill text-center" %>
-      <%#= f.date_select(:release, {}, class: "small", display: "inline-block") %>
+      <%= f.text_field :release, class: "form-control input-sm text-center fill", placeholder: "dd/mm/aaaa" %>
     </div>
     <%= f.label :genre, class: "col-sm-1 control-label" %>
     <div class="col-sm-3">
-      <%= f.text_field :genre, class: "film_genre", data: {genres: @genres.as_json} %>
+      <%= f.text_field :genre, class: "film_genre genero", data: {genres: @genres.as_json, pre: @film.genre_asjson} %>
     </div>
   </div>
+
   <div class="form-group">
     <%= f.label :length, class: "col-sm-3 control-label" %>
     <div class="col-sm-3 input-group">
@@ -48,14 +49,14 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :director_ids, "Diretores", class: "col-sm-3 control-label" %>
+    <%= f.label :director_ids, "Direção", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
       <%= f.text_field :director_ids, class: "form-control directors", data:
       {pre: @film.directors.as_json(only: [:id, :name])} %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :writer_ids, "Roteiristas", class: "col-sm-3 control-label" %>
+    <%= f.label :writer_ids, "Roteiro", class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
       <%= f.text_field :writer_ids, class: "form-control writers", data: {pre:
         @film.writers.as_json(only: [:id, :name])} %>
