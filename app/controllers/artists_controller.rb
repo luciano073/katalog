@@ -36,7 +36,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.new(artist_params)
     respond_to do |format|
       if @artist.save
-        format.html { redirect_to @artist, notice: 'Artista foi criado com sucess0.' }
+        format.html { redirect_to @artist, notice: 'Artista foi criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @artist }
       else
         format.html { render action: 'new' }

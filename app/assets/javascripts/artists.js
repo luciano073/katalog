@@ -17,7 +17,11 @@ jQuery(document).ready(function($) {
       {
        theme             : "facebook",
        preventDuplicates : true,
-       prePopulate       : $('.artist_professions').data('pre')
+       prePopulate       : $('.artist_professions').data('pre'),
+       searchDelay       : 100,
+       hintText          : "Digite para buscar",
+       noResultsText     : "Sem resultados",
+       searchingText     : "Buscando..."
       }
     );
 
@@ -26,7 +30,7 @@ jQuery(document).ready(function($) {
       theme            : "artist-country",
       tokenLimit       : 1,
       prePopulate      : $('.artist_country').data('pre'),
-      searchDelay      : 200,
+      searchDelay      : 100,
       hintText         : "Digite para buscar",
       noResultsText    : "Sem resultados",
       searchingText    : "Buscando...",

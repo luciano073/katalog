@@ -27,8 +27,12 @@ class Film < ActiveRecord::Base
     self.genre.split('|').map { |e| {name: e} }.as_json if self.genre
   end
 
-  def genre
-    self[:genre].gsub('|', ' | ') #sobrescreve read_method default
+  # def genre
+  #   self[:genre].gsub('|', ' | ') if self.genre #sobrescreve read_method default
+  # end
+
+  def genre_formatt
+    self.genre.gsub('|', ' | ') if self.genre
   end
 
   def cast

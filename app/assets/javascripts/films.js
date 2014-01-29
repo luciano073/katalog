@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
       preventDuplicates : true,
       animateDropdown   : false,
       minChars          : 2,
-      searchDelay       : 200,
+      searchDelay       : 100,
       hintText          : "Digite para buscar",
       noResultsText     : "Sem resultados",
       searchingText     : "Buscando..."
@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
       preventDuplicates : true,
       animateDropdown   : false,
       minChars          : 2,
-      searchDelay       : 200,
+      searchDelay       : 100,
       hintText          : "Digite para buscar",
       noResultsText     : "Sem resultados",
       searchingText     : "Buscando..."
@@ -35,7 +35,7 @@ jQuery(document).ready(function($) {
       preventDuplicates : true,
       animateDropdown   : false,
       minChars          : 2,
-      searchDelay       : 200,
+      searchDelay       : 100,
       hintText          : "Digite para buscar",
       noResultsText     : "Sem resultados",
       searchingText     : "Buscando..."
@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
       theme            : "film-country",
       tokenLimit       : 1,
       prePopulate      : $('.film_country').data('pre'),
-      searchDelay      : 200,
+      searchDelay      : 100,
       animateDropdown  : false,
       hintText         : "Digite para buscar",
       noResultsText    : "Sem resultados",
