@@ -36,7 +36,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.new(artist_params)
     respond_to do |format|
       if @artist.save
-        format.html { redirect_to @artist, notice: 'Artista foi criado com sucesso.' }
+        format.html { redirect_to @artist, notice: 'Artista criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @artist }
       else
         format.html { render action: 'new' }
@@ -48,7 +48,7 @@ class ArtistsController < ApplicationController
   def update
     respond_to do |format|
       if @artist.update(artist_params)
-        format.html { redirect_to @artist, notice: 'Artista foi atualizado com sucesso.' }
+        format.html { redirect_to @artist, notice: 'Artista atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -63,7 +63,7 @@ class ArtistsController < ApplicationController
   def destroy
     @artist.destroy
     respond_to do |format|
-      format.html { redirect_to films_url }
+      format.html { redirect_to artists_url }
       format.json { head :no_content }
     end
   end

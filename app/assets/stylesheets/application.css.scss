@@ -16,6 +16,7 @@
  *= require jquery-ui
  *= require lightbox
  *= require jquery.bxslider
+ *= require sidebar
  *= require_self
  *= require_tree .
  */
@@ -69,3 +70,4 @@ a#home{
     color: #fff;
   }
 }
+

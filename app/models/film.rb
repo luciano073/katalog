@@ -27,11 +27,15 @@ class Film < ActiveRecord::Base
     self.genre.split('|').map { |e| {name: e} }.as_json if self.genre
   end
 
+  def br_title
+    ApplicationController.helpers.normalize_title(self.brazilian_title)
+  end
+
   # def genre
   #   self[:genre].gsub('|', ' | ') if self.genre #sobrescreve read_method default
   # end
 
-  def genre_formatt
+  def genre_format
     self.genre.gsub('|', ' | ') if self.genre
   end
 

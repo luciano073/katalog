@@ -16,7 +16,7 @@
     </p>
     <% if @artist.death %>
       <p class="text-center">
-        <small><%= "(#{@artist.birthday.to_s(:br_date)} - #{@artist.death.to_s(:br_date)})" %></small>
+        <small><%= "(#{@artist.birthday.year} - #{@artist.death.year})" %></small>
 
       </p>      
     <% end %>   
@@ -29,12 +29,18 @@
       <tr>
         <td class="text-right"><strong>Nascimento:</strong></td>
         <td>
-          <% if @artist.birthday and not @artist.death %>
+          <% if @artist.birthday %>
             <%= @artist.birthday.to_s(:br_date) %>&nbsp;
-            <%= "(#{Date.today.year - @artist.birthday.year})" %>
+            <small><%= "(#{@artist.age})" %></small>
           <% end %>
         </td>
       </tr>
+      <% if @artist.death %>
+        <tr>
+          <td class="text-right"><strong>Falecimento:</strong></td>
+          <td><%= I18n.l @artist.death %></td>
+        </tr>
+      <% end -%>
       <tr>
         <td class="text-right"><strong>Estatura:</strong></td>
         <td><%= "#{@artist.height} cm" if @artist.height and not @artist.height.empty?%></td>

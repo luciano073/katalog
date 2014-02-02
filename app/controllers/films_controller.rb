@@ -52,7 +52,7 @@ class FilmsController < ApplicationController
     # render inline: "<%= @film.production_team.inspect %>"
     respond_to do |format|
       if @film.save
-        format.html { redirect_to @film, notice: 'Filme foi criado com sucesso.' }
+        format.html { redirect_to @film, notice: 'Filme criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @film }
       else
         format.html { render action: 'new' }
@@ -66,7 +66,7 @@ class FilmsController < ApplicationController
   def update
     respond_to do |format|
       if @film.update(film_params)
-        format.html { redirect_to @film, notice: 'Filme foi atualizado com sucesso.' }
+        format.html { redirect_to @film, notice: 'Filme atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

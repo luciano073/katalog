@@ -1,4 +1,5 @@
 class Artist < ActiveRecord::Base
+  # include ActionView::Helpers::DateHelper
 	attr_reader :profession_tokens
 
   before_save :name_normalize
@@ -22,6 +23,27 @@ class Artist < ActiveRecord::Base
 
   def profession_tokens=(ids)
     self.profession_ids = ids.split(",")
+  end
+
+  def age
+    diff = 0
+    if self.birthday && !self.death
+      # distance_of_time_in_words(self.birthday, Date.today)
+      diff = Date.today - self.birthday
+    end
+    if self.birthday and self.death
+      # distance_of_time_in_words(self.birthday, self.death)
+      diff = self.death - self.birthday
+    end
+    years, rest = diff.abs.divmod(365.25)
+    months = rest / 30 if rest > 0
+    age = "#{years} ano#{"s" if years > 1}"
+    if months and months > 1       
+      age << " e #{months.to_i} mês" if months < 2
+      age << " e #{months.to_i} meses" if months > 2
+    end
+    return age   
+      
   end
 
   def self.search(search)
