@@ -48,7 +48,10 @@
       </tr>
       <tr>
         <td class="text-right"><strong>Elenco:</strong></td>
-        <td><%= @film.cast.map(&:name).join(", ").truncate(67, separator: ' ') unless @film.cast.empty? %></td>
+        <td>
+          <%= @film.cast.map(&:name).join(", ").truncate(90, separator: ' ') unless @film.cast.empty? %>&nbsp;
+          <em><small><%= link_to '(todos)', '#film-cast', data: {toggle: 'modal'} if @film.cast.map(&:name).join(", ").length > 90 %></small></em>
+        </td>
       </tr>
     </table>
         
@@ -73,7 +76,27 @@
     </div>
   </section>
 
-  
-
 </div>
 
+<!-- bootstrap modal -->
+<div class="modal fade" id="film-cast" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= @film.br_title %> <small>(elenco)</small></h4>
+      </div>
+      <div class="modal-body">
+        <!-- <ul> -->
+        <% @film.cast.each do |a| %>
+          <p><em><small><%= link_to a.name, a %></small></em></p>
+        <% end -%>
+        <!-- </ul> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

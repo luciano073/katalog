@@ -16,7 +16,7 @@ class Artist < ActiveRecord::Base
   mount_uploader :photo, PhotoUploader
 
   scope :directors, -> { joins(:professions).where(professions: {id: 2})}
-  scope :writers,   -> { joins(:professions).where(professions: {id: 3})}
+  scope :writers,   -> { joins(:professions).where(professions: {id: [3, 5]})}
   scope :cast,      -> { joins(:professions).where(professions: {id: [1, 4]})}
   scope :random,    -> {order('random()')} #specific to postgresql
 
