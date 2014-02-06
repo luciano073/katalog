@@ -8,14 +8,7 @@ module ApplicationHelper
     end
   end
 
-  def normalize_title(str) #Film title (ex. "terminator, the" becomes "the terminator")
-    re = /,\s+[ao]s?n?\z|,\s+the\z|,\s+u[mn]a?s?\z/i
-    str ||= "nenhum"
-    str.sub!(re, '')
-    return str unless $~
-    str.prepend("#{$~.to_s.delete(",").lstrip} ")
-  end
-
+  
   def navigation
     if controller.action_name =~ /^[en]/
       base = t controller.controller_name, scope: :controller

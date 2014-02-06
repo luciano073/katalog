@@ -1,6 +1,6 @@
 <p><%= I18n.l Date.today, format: :long_day %></p>
 <p id="total-films">Filmes cadastrados: <strong><%= Film.count %></strong></p>
-<p><strong>Último filme cadastrado:</strong> <br> <%= "#{Film.last.br_title} - " %> <em><%= "(#{I18n.l Film.last.created_at, format: :short})" %></em>
+<p><strong>Último filme cadastrado:</strong> <br> <%= "#{normalize_title(Film.last.brazilian_title)} - " %> <em><%= "(#{I18n.l Film.last.created_at, format: :short})" %></em>
 </p>
 
 <p id='total-artists'>Artistas cadastrados: <strong><%= Artist.count %></strong></p>

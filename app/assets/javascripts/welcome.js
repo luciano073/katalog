@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
       maxSlides       : 5,
       speed           : 3000,
       slideMargin     : 10,
-      moveSlides      : 1,
+      moveSlides      : 2,
       slideWidth      : 130
     });
 
@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
       maxSlides       : 5,
       speed           : 3000,
       slideMargin     : 10,
-      moveSlides      : 1,
+      moveSlides      : 2,
       slideWidth      : 130
     });
   

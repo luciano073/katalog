@@ -27,30 +27,23 @@ class Film < ActiveRecord::Base
     self.genre.split('|').map { |e| {name: e} }.as_json if self.genre
   end
 
-  def br_title
-    ApplicationController.helpers.normalize_title(self.brazilian_title)
-  end
-
-  # def genre
-  #   self[:genre].gsub('|', ' | ') if self.genre #sobrescreve read_method default
-  # end
 
   def genre_format
     self.genre.gsub('|', ' | ') if self.genre
   end
 
   def cast
-    self.production_team.map { |e| e.artist if e.cast? }.compact
+    self.production_team.map { |e| e.artist if e.cast? }.compact.sort_by {|a| a.name}
     # cast.map(&:name).join(", ") unless cast.empty?
   end
 
   def directors
-    self.production_team.map { |e| e.artist if e.director? }.compact
+    self.production_team.map { |e| e.artist if e.director? }.compact.sort_by {|a| a.name}
     # directors.map(&:name).join(", ") unless directors.empty?
   end
 
   def writers
-    self.production_team.map { |e| e.artist if e.writer? }.compact
+    self.production_team.map { |e| e.artist if e.writer? }.compact.sort_by {|a| a.name}
     # writers.map(&:name).join(", ") unless writers.empty?
   end
 

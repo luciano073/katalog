@@ -52,8 +52,8 @@
       <tr>
         <td class="text-right"><strong>Produções:</strong></td>
         <td>
-          <%= @artist.films.map {|e| normalize_title(e.brazilian_title)}.uniq.join(", ").truncate(90, separator: ' ') unless @artist.films.empty? %>&nbsp;
-          <em><small><%= link_to '(todos)', '#artist-productions', data: {toggle: 'modal'} if @artist.films.map {|e| normalize_title(e.brazilian_title)}.uniq.join(", ").length > 90 %></small></em>
+          <%= @artist.films.map {|e| normalize_title(e.brazilian_title)}.uniq.join(", ").truncate(90, separator: ' ', omission: '') unless @artist.films.empty? %>&nbsp;
+          <em><small><%= link_to '...mais', '#artist-productions', data: {toggle: 'modal'} if @artist.films.map {|e| normalize_title(e.brazilian_title)}.uniq.join(", ").length > 90 %></small></em>
         </td>
       </tr>      
     </table>
@@ -62,7 +62,7 @@
       <ul id="artist-films" class="bxslider">
         <% @artist.films.uniq.each do |f| %>
           <li>
-            <%= link_to(image_tag(f.poster_url(:thumb), title: f.br_title, class: "img-thumbnail"), f) %>
+            <%= link_to(image_tag(f.poster_url(:thumb), title: normalize_title(f.brazilian_title), class: "img-thumbnail"), f) %>
           </li>
         <% end %>
       </ul>
@@ -91,8 +91,8 @@
       </div>
       <div class="modal-body">
         <!-- <ul> -->
-        <% @artist.films.uniq.each do |f| %>
-          <p><em><small><%= link_to f.br_title, f %></small></em></p>
+        <% @artist.films.order(:release).uniq.each do |f| %>
+          <p><em><small><%= link_to "#{normalize_title(f.brazilian_title)} (#{f.release.year if f.release})", f %></small></em></p>
         <% end -%>
         <!-- </ul> -->
       </div>

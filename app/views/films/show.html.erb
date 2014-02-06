@@ -49,8 +49,8 @@
       <tr>
         <td class="text-right"><strong>Elenco:</strong></td>
         <td>
-          <%= @film.cast.map(&:name).join(", ").truncate(90, separator: ' ') unless @film.cast.empty? %>&nbsp;
-          <em><small><%= link_to '(todos)', '#film-cast', data: {toggle: 'modal'} if @film.cast.map(&:name).join(", ").length > 90 %></small></em>
+          <%= @film.cast.map(&:name).join(", ").truncate(90, separator: ' ', omission: '') unless @film.cast.empty? %>&nbsp;
+          <em><small><%= link_to '...mais', '#film-cast', data: {toggle: 'modal'} if @film.cast.map(&:name).join(", ").length > 90 %></small></em>
         </td>
       </tr>
     </table>
@@ -84,7 +84,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><%= @film.br_title %> <small>(elenco)</small></h4>
+        <h4 class="modal-title" id="myModalLabel"><%= normalize_title(@film.brazilian_title) %> <small>(elenco)</small></h4>
       </div>
       <div class="modal-body">
         <!-- <ul> -->
