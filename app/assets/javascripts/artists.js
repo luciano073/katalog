@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
     maxSlides       : 4,
     speed           : 3000,
     slideMargin     : 10,
-    moveSlides      : 1,
+    moveSlides      : 2,
     slideWidth      : 130
   });
 
