@@ -10,7 +10,7 @@
     <%= form_tag artists_path, method: "get", :class => "form-horizontal" do %>
       <div class="input-group input-group-sm">
         
-        <%= text_field_tag :search, params[:search], class: "form-control" %>
+        <%= search_field_tag :search, params[:search], class: "form-control" %>
         <!-- <label for="" class="col-sm-2 control-label">Filtrar</label> -->
         <span class="input-group-btn">
           <%= submit_tag "Filtrar", :name => "nil", :class => "btn btn-default", data: {:disable_with => "Aguarde..."} %>
@@ -49,9 +49,9 @@
         <tr>
           <td><%= link_to artist.name, artist %></td>
           <td><%= artist.real_name %></td>
-          <td><%= artist.birthday.to_s(:br_date) if artist.birthday %></td>
+          <td><%= I18n.l artist.birthday if artist.birthday %></td>
           <td><%= artist.country.name if artist.country %></td>
-          <td><%= link_to 'Editar', edit_artist_path(artist), class: "btn btn-info btn-xs" %></td>
+          <td><%= link_to 'Atualizar', edit_artist_path(artist), class: "btn btn-info btn-xs" %></td>
           <td><%= link_to "Excluir", artist, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-xs"%>
           </td>
         </tr>

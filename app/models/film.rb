@@ -121,7 +121,7 @@ class Film < ActiveRecord::Base
   def bd_title
     # re = /^[ao]s?n?\s+|^the\s+|^u[mn]a?s?\s+/i
     re = Regexp.new('^[ao]s?[[:blank:]]+|^the[[:blank:]]+|\Aan[[:blank:]]+|^u[mn]a?s?\s+', true)
-    re_t = /\s+[ixv]{,3}\z/i # for titles with II, III and so on
+    re_t = /\bi{2,3}\b|\bi[vx]\b|\b[vx]i{,3}\b/i # for titles with II, III and so on
     if self.brazilian_title
       self.brazilian_title = self.brazilian_title.strip.squeeze(' ').nome_proprio
       str = self.brazilian_title.sub(re, '')
