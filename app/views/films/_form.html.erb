@@ -1,34 +1,24 @@
 <% content_for :title, navigation %>
 <%= form_for(@film, html: {multipart: true, class: "form-horizontal", role: 'form'}) do |f| %>
-  <!-- <%# if @film.errors.any? %> -->
-    <!-- <div id="error_explanation"> -->
-      <!-- <h2><%#= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h2> -->
-<!--  -->
-      <!-- <ul> -->
-      <!-- <%# @film.errors.full_messages.each do |msg| %> -->
-        <!-- <li><%#= msg %></li> -->
-      <!-- <%# end %> -->
-      <!-- </ul> -->
-    <!-- </div> -->
-  <!-- <%# end %> -->
-
-  <div class="form-group">
-    <%= f.label :title, class: "col-sm-3 control-label" %>
-    <div class="col-sm-7">
-      <%= f.text_field :title, class: "form-control input-sm fill", required: true %>
-    </div>
-  </div>
+  
   <div class="form-group">
     <%= f.label :brazilian_title, class: "col-sm-3 control-label" %>
     <div class="col-sm-7">
-      <%= f.text_field :brazilian_title, class: "form-control input-sm fill", required: true %>
+      <%= f.text_field :brazilian_title, class: "form-control input-sm fill validate[required]" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :title, class: "col-sm-3 control-label" %>
+    <div class="col-sm-7">
+      <%= f.text_field :title, class: "form-control input-sm fill" %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :release, class: "col-sm-3 control-label" %>
     <div class="col-sm-3">
-      <%= f.text_field :release, class: "form-control input-sm text-center fill", placeholder: "dd/mm/aaaa" %>
+      <%= f.text_field :release, class: "form-control input-sm text-center fill validate[custom[validDate]]", placeholder: "dd/mm/aaaa" %>
     </div>
     <%= f.label :genre, class: "col-sm-1 control-label" %>
     <div class="col-sm-3">

@@ -9,14 +9,16 @@ jQuery(document).ready(function($) {
 
   $('span.tip').tooltip();
 
-  $('input#artist_height').setMask({ mask: '299'});
+  $('input#artist_height').setMask({ mask: '999'});
   $('input.date').setMask('date');
+  $('#new_artist').validationEngine();
 
  
   $('.artist_professions').tokenInput($('.artist_professions').data('professions'),
       {
        theme             : "facebook",
        preventDuplicates : true,
+       animateDropdown  : false,
        prePopulate       : $('.artist_professions').data('pre'),
        searchDelay       : 100,
        hintText          : "Digite para buscar",
@@ -29,6 +31,7 @@ jQuery(document).ready(function($) {
     {
       theme            : "artist-country",
       tokenLimit       : 1,
+      animateDropdown  : false,
       prePopulate      : $('.artist_country').data('pre'),
       searchDelay      : 100,
       hintText         : "Digite para buscar",

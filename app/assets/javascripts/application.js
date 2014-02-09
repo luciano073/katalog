@@ -17,6 +17,8 @@
 //= require bootstrap
 //= require jquery.bxslider.min
 //= require lightbox-2.6.min
+//= require jquery.validationEngine
+//= require jquery.validationEngine-pt_BR
 //= require jquery.tokeninput
 //= require meiomask.min
 // require select2

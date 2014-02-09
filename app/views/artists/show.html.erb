@@ -43,7 +43,7 @@
       <% end -%>
       <tr>
         <td class="text-right"><strong>Estatura:</strong></td>
-        <td><%= "#{@artist.height} cm" if @artist.height and not @artist.height.empty?%></td>
+        <td><%= @artist.height_presenter %></td>
       </tr>      
       <tr>
         <td class="text-right"><strong>Atividades:</strong></td>

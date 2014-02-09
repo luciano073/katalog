@@ -8,12 +8,12 @@
   </section>
   <section id="film-show" class="col-sm-9">
     <h3 class="text-center">
-      <strong><%= normalize_title(@film.brazilian_title) %></strong>
+      <strong><%= normalize_title(@film.brazilian_title) if @film.brazilian_title.present?%></strong>
       <small><%= "(#{@film.release.year})" if @film.release%></small>
     </h3>
     
     <p class="text-center">
-      <small class="original-name"> " <%= normalize_title(@film.title) %> "</small>&nbsp;
+      <small class="original-name"> " <%= normalize_title(@film.title) if @film.title.present?%> "</small>&nbsp;
       <%= image_tag( @film.country.flag.url(:_16), title: @film.country.name) if @film.country %>
     </p>
 
@@ -32,7 +32,7 @@
       </tr>
       <tr>
         <td class="text-right"><strong>Duração:</strong></td>
-        <td><%= "#{@film.length} minutos" if @film.length and not @film.length.empty? %></td>
+        <td><%= "#{@film.length} minutos" if @film.length.present? %></td>
       </tr>
       <tr>
         <td class="text-right"><strong>Direção:</strong></td>

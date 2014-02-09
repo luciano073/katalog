@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 
+
+
   $('#film-slider').bxSlider({
       auto            : true,
       // autoControls : true,
@@ -27,5 +29,7 @@ jQuery(document).ready(function($) {
       moveSlides      : 2,
       slideWidth      : 130
     });
+
+  $('#f_search').validationEngine({"promptPosition": "bottomRight"});
   
 });

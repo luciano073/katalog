@@ -1,6 +1,8 @@
 jQuery(document).ready(function($) {
 
   $('#film_release').setMask('date');
+  $('#film_length').setMask({mask: '999'});
+  $('#new_film').validationEngine();
 
   $('input.directors').tokenInput('/artists/directors.json',
     {

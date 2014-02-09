@@ -1,6 +1,7 @@
 Katalog::Application.routes.draw do
   
   get "welcome/index"
+  get "welcome/search", to: 'welcome#search', as: 'search'
   get "artists/writers"
   get "artists/directors"
   get "artists/cast"

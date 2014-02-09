@@ -3,7 +3,7 @@
     <div class="form-group">
       <%= f.label :name, class: "col-sm-3 control-label" %>
       <div class="col-sm-7">
-        <%= f.text_field :name, placeholder: "nickname", class: "form-control input-sm fill", required: true %>
+        <%= f.text_field :name, class: "form-control input-sm fill validate[required]" %>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
     <div class="form-group">
       <%= f.label :height, class: "col-sm-3 control-label" %>
       <div class="col-sm-3 input-group">
-        <%= f.number_field :height, class: "form-control input-sm fill text-right" %><span class="input-group-addon">cm</span>
+        <%= f.number_field :height, class: "form-control input-sm fill text-right validate[custom[integer],min[60],max[260]]" %><span class="input-group-addon">cm</span>
       </div>
       <%= f.label :country_id, "País", class: "col-sm-1 control-label" %>
       <div class="col-sm-3">
@@ -32,7 +32,7 @@
         title="Nascimento"></span>
       </label>
       <div class="col-sm-3">
-        <%= f.text_field :birthday, class: "form-control input-sm date fill text-center"%>
+        <%= f.text_field :birthday, placeholder: 'DD/MM/AAA', class: "form-control input-sm date fill text-center validate[custom[validDate]]"%>
         
       </div>      
       <label for="artist_death" class="col-sm-1 control-label">
@@ -40,7 +40,7 @@
         data-toggle="tooltip" title="Falecimento"></span>
       </label>
         <div class="col-sm-3">
-          <%= f.text_field :death, class: "form-control input-sm date fill text-center" %>
+          <%= f.text_field :death, placeholder: 'DD/MM/AAA', class: "form-control input-sm date fill text-center validate[custom[validDate]]" %>
         </div>
     </div>
 

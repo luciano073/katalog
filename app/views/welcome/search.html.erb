@@ -1,0 +1,16 @@
+
+<div>
+  <p><strong>Filmes localizados:</strong> [<em style='color:green'><%= " #{@term} " %></em>]</p>
+  <% @films.each do |f| %>
+    <p><%= link_to f.brazilian_title, f %></p>
+  <% end -%>
+  <%= content_tag('p', content_tag(:em, 'nenhum')) if @films.empty? %>
+  
+  <hr>
+  
+  <p><strong>Artistas localizados:</strong>[<em style='color:green'><%= " #{@term} " %></em>]</p>
+  <% @artists.each do |a| %>
+    <p><%= highlight(link_to(a.name, a), @term) %></p>
+  <% end -%>
+  <%= content_tag('p', content_tag(:em, 'nenhum')) if @artists.empty? %>
+</div>
