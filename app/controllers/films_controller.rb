@@ -10,6 +10,10 @@ class FilmsController < ApplicationController
       10).order('films.brazilian_title')
   end
 
+  def search
+    @films = Film.search(params[:q])
+    # @films = Film.random.limit 3
+  end
   # GET /films/1
   # GET /films/1.json
   def show

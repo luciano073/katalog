@@ -8,7 +8,10 @@ class ArtistsController < ApplicationController
         per_page: 10).order('artists.name')
     respond_with @artists.as_json(only: [:id, :name])
 	end
-
+  def search
+    @artists = Artist.search(params[:q])
+    # @artists = Artist.random.limit 3
+  end
 ## Only to attend autocomplete plugin tokenInput
   def writers
     @artists = Artist.writers.search(params[:q])

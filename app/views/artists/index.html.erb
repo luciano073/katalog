@@ -52,7 +52,9 @@
           <td><%= I18n.l artist.birthday if artist.birthday %></td>
           <td><%= artist.country.name if artist.country %></td>
           <td><%= link_to 'Atualizar', edit_artist_path(artist), class: "btn btn-info btn-xs" %></td>
-          <td><%= link_to "Excluir", artist, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-xs"%>
+          <td><%= link_to artist, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-xs" do %>
+            <i class="fa fa-trash-o fa-lg"></i> Excluir
+            <% end -%>
           </td>
         </tr>
       <% end %>

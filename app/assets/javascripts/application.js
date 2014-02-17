@@ -19,6 +19,8 @@
 //= require lightbox-2.6.min
 //= require jquery.validationEngine
 //= require jquery.validationEngine-pt_BR
+//= require typeahead.bundle
+//= require handlebars-v1.3.0
 //= require jquery.tokeninput
 //= require meiomask.min
 // require select2

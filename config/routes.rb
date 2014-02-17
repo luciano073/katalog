@@ -1,10 +1,13 @@
 Katalog::Application.routes.draw do
   
   get "welcome/index"
-  get "welcome/search", to: 'welcome#search', as: 'search'
+  # get "welcome/films_prefetch"
+  # get "welcome/artists_prefetch"
   get "artists/writers"
   get "artists/directors"
   get "artists/cast"
+  get "artists/search"
+  get "films/search"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
