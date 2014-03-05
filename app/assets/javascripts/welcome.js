@@ -64,10 +64,11 @@ jQuery(document).ready(function($) {
       displayKey : 'brazilian_title',
       source     : films.ttAdapter(),
       templates  : {
-      header     : '<h3 id="h-film">Filmes</h3> <hr width="80%">',
+      header     : '<h4 id="h-film">Filmes</h4> <hr width="80%">',
       suggestion : Handlebars.compile([
           '<img src="{{img_url}}" class="img-thumbnail"/>',
-          '<p id="suggestion">{{brazilian_title}}</p>'
+          '<p id="suggestion">{{brazilian_title}}</p>',
+          '<span id="year-film"> ({{year}})</span>'
           ].join(''))
       }
     },
@@ -76,7 +77,7 @@ jQuery(document).ready(function($) {
       displayKey : 'name',
       source     : artists.ttAdapter(),
       templates  : {
-      header     : '<h3 id="h-artist">Artistas</h3> <hr width="80%">',
+      header     : '<h4 id="h-artist">Artistas</h4> <hr width="80%">',
       suggestion : Handlebars.compile([
           '<img src="{{img_url}}" class="img-thumbnail"/>',
           '<p id="suggestion">{{name}}</p>'

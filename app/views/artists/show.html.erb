@@ -12,7 +12,7 @@
     <h3 class="text-center"><%= @artist.name %> </h3>
    
     <p class="text-center art-real-name">
-      <small class="original-name">" <%= @artist.real_name %>"</small>&nbsp; <%= image_tag(@artist.country.flag.url(:_16), title: @artist.country.name) if @artist.country%>
+      <small class="original-name">" <%= @artist.real_name %> "</small>&nbsp; <%= image_tag(@artist.country.flag.url(:_16), title: @artist.country.name) if @artist.country%>
     </p>
     <% if @artist.death %>
       <p class="text-center">

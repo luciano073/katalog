@@ -39,6 +39,9 @@
   display: inline;
   margin-left: 10px;
 }
+#year-film{
+  font-style: italic;
+}
 
 #h-film, #h-artist{
   margin-left: 5px;
@@ -53,21 +56,21 @@ hr{
 
 
 
-.typeahead,
-.tt-query,
-.tt-hint {
-  width: 396px;
-  height: 30px;
-  padding: 8px 12px;
-  font-size: 16px;
-  line-height: 25px;
-  margin-top: 15px;
-  border: 2px solid #ccc;
-  -webkit-border-radius: 8px;
-     -moz-border-radius: 8px;
-          border-radius: 8px;
-  outline: none;
-}
+// .typeahead,
+// .tt-query,
+// .tt-hint {
+//   width: 396px;
+//   height: 30px;
+//   padding: 8px 12px;
+//   font-size: 16px;
+//   line-height: 25px;
+//   margin-top: 15px;
+//   border: 2px solid #ccc;
+//   -webkit-border-radius: 8px;
+//      -moz-border-radius: 8px;
+//           border-radius: 8px;
+//   outline: none;
+// }
 
 .typeahead {
   background-color: #fff;
@@ -88,7 +91,7 @@ hr{
 }
 
 .tt-dropdown-menu {
-  width: 410px;
+  width: 400px;
   margin-top: 12px;
   padding: 8px 0;
   background-color: #fff;
@@ -104,8 +107,8 @@ hr{
 
 .tt-suggestion {
   padding: 3px 20px;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .tt-suggestion.tt-cursor {

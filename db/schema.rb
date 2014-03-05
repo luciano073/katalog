@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140105210945) do
+ActiveRecord::Schema.define(version: 20140220142227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "artists", force: true do |t|
     t.string   "name"
@@ -24,7 +25,6 @@ ActiveRecord::Schema.define(version: 20140105210945) do
     t.string   "height"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "country"
     t.string   "photo"
     t.integer  "country_id"
   end

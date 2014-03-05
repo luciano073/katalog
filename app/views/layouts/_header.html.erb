@@ -12,60 +12,33 @@
       <%= link_to root_path, class: "navbar-brand", id: 'home' do %>
         <span class="glyphicon glyphicon-home"></span> KATALOG
       <% end -%>
-      <%#= link_to "KataLog", root_path, class: "navbar-brand #{'active' if params[:controller] == 'welcome'}" %>
-      <!-- <a class="navbar-brand" href="#">Project name</a> -->
+      
     </div>
+
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <%= content_tag :li, class: ("active" if params[:controller] == 'films') do %>
           <%= link_to films_path do %>
-            <span class="glyphicon glyphicon-film"></span> Filmes
+            <i class="fa fa-film fa-lg"></i> Filmes
           <% end %>
         <% end %>
-        <!-- <li class="active"><%#= link_to films_path do %>
-          <span class="glyphicon glyphicon-film"></span> Filmes
-        <%# end %>
-        </li> -->
+        
         <%= content_tag :li, class: ("active" if params[:controller] == 'artists') do %>
           <%= link_to artists_path do %>
-            <span class="glyphicon glyphicon-user"></span> Artistas
+            <i class="fa fa-users fa-lg"></i> Artistas
           <% end %>
         <% end %>
         
-        <li><a href="#contact">Midia</a></li>
-        <li><a href="#contact">Impressos</a></li>
-        <!-- <li class="dropdown"> -->
-          <%#= link_to films_path, data: {toggle: "dropdown"}, class: "dropdown-toggle" do %>
-            <!-- Filmes<b class="caret"></b> -->
-          <%# end %>
-          <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filmes<b class="caret"></b></a> -->
-          <!-- <ul class="dropdown-menu"> -->
-            <!-- <li><%#= link_to "Novo Filme", new_film_path %></li> -->
-            <!-- <li><a href="#">Something else here</a></li> -->
-            <!-- <li class="divider"></li> -->
-            <!-- <li class="dropdown-header">Nav header</li> -->
-            <!-- <li><a href="#">Separated link</a></li> -->
-            <!-- <li><a href="#">One more separated link</a></li> -->
-          <!-- </ul> -->
-        <!-- </li> -->
-      </ul>
-      <!-- <input type="text" id="g_search" class="typeahead" autocomplete='off' placeholder="Buscar"> -->
-      <%= search_field_tag 'g_search', nil, class: 'typeahead', autocomplete: 'off', placeholder: 'Buscar' %>
-      <%#= form_tag(search_path, method: 'get', class: "navbar-form navbar-left", role: 'search', id: 'f_search' ) do %>
-        <!-- <div class="form-group"> -->
-          <%#= search_field_tag :g_search, params[:g_search], class: "form-control validate[minSize[2]]" %>
-          <!-- <input type="text" class="form-control" placeholder="Search"> -->
-        <!-- </div> -->
-        <!-- <button type="submit" class="btn btn-default" >Buscar</button> -->
-      <%# end -%>
-      <!-- <form class="navbar-form navbar-left" role="search"> -->
+        <li><a href="#contact"><i class="fa fa-video-camera fa-lg"></i> Blurays&DVDs</a></li>
+        <li><a href="#contact"><i class="fa fa-book fa-lg"></i> Livros&HQs</a> </li>
         
-      <!-- </form> -->
-      <ul class="nav navbar-nav navbar-right">
-        <!-- <li><a href="../navbar/">Default</a></li> -->
-        <!-- <li><a href="../navbar-static-top/">Static top</a></li> -->
-        <!-- <li><a href="./">Fixed top</a></li> -->
       </ul>
-    </div><!--/.nav-collapse -->
+      
+      <%= form_tag(nil, class: "navbar-form navbar-left", role: 'search', id: 'f_search' ) do %>
+        <!-- <input type="text" class="form-control" placeholder="&#xf002;" id="g_search"> -->
+        <%= search_field_tag 'g_search', nil, class: "form-control", placeholder: "Buscar...",  autocomplete: 'off' %>
+      
+      <% end -%>
+    </div>
   </div>
 </header>

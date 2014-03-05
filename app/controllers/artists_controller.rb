@@ -14,7 +14,7 @@ class ArtistsController < ApplicationController
   end
 ## Only to attend autocomplete plugin tokenInput
   def writers
-    @artists = Artist.writers.search(params[:q])
+    @artists = Artist.writers.uniq.search(params[:q])
     respond_with @artists.as_json(only: [:id, :name])
   end
   def directors
