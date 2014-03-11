@@ -5,6 +5,7 @@
     <%= link_to(@film.poster_url(:normal), data: {lightbox: "poster"}, title: normalize_title(@film.brazilian_title)) do %>
       <% image_tag @film.poster_url(:medium), class: "img-thumbnail" %>
     <% end %>
+    <p class='film-created tip' data-toggle='tooltip' data-placement='bottom' title='Data do cadastramento.'><strong>[ </strong><%= I18n.l @film.created_at, format: '%d/%m/%Y, %H:%M' %> <strong> ]</strong></p>
   </section>
   <section id="film-show" class="col-sm-9">
     <h3 class="text-center">
@@ -13,8 +14,8 @@
     </h3>
     
     <p class="text-center">
-      <small class="original-name"> " <%= normalize_title(@film.title) if @film.title.present?%> "</small>&nbsp;
-      <%= image_tag( @film.country.flag.url(:_16), title: @film.country.name) if @film.country %>
+      <small class="original-name tip" data-toggle="tooltip" data-placement="bottom" title="Título original"> " <%= normalize_title(@film.title) if @film.title.present?%> "</small>&nbsp;
+      <%= image_tag( @film.country.flag.url(:_16), title: @film.country.name, class: 'tip', data: {toggle: 'tooltip', placement: 'right'}) if @film.country %>
     </p>
 
     <table id="film-data" class="table table-borderless">

@@ -7,7 +7,7 @@
 // ready = function() {
 jQuery(document).ready(function($) {
 
-  $('span.tip').tooltip();
+  $('.tip').tooltip();
 
   $('input#artist_height').setMask({ mask: '999'});
   $('input.date').setMask('date');
