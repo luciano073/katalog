@@ -5,7 +5,7 @@
     <%= link_to(@film.poster_url(:normal), data: {lightbox: "poster"}, title: normalize_title(@film.brazilian_title)) do %>
       <% image_tag @film.poster_url(:medium), class: "img-thumbnail" %>
     <% end %>
-    <p class='film-created tip' data-toggle='tooltip' data-placement='bottom' title='Data do cadastramento.'><strong>[ </strong><%= I18n.l @film.created_at, format: '%d/%m/%Y, %H:%M' %> <strong> ]</strong></p>
+    <p class='film-created tip' data-toggle='tooltip' data-placement='bottom' title="Data do cadastramento"><strong>[ </strong><%= I18n.l @film.created_at, format: '%d/%m/%Y, %H:%M' %> <strong> ]</strong></p>
   </section>
   <section id="film-show" class="col-sm-9">
     <h3 class="text-center">

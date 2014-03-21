@@ -1,0 +1,38 @@
+<% content_for :title, navigation %>
+<div class="col-sm-12 above_title"></div>
+<div class="col-sm-12 title">
+  <h5 class="text-center">Lista de Profissões</h5>
+</div>
+
+<div class="col-sm-12">
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#ID</th>
+        <th>Nome</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @professions.each do |p| %>
+        <tr>
+          <td><%= p.id %></td>
+          <td><%= p.name %></td>
+          <td><%= link_to 'Atualizar', edit_profession_path(p), class: "btn btn-info btn-xs" %></td>
+          <td><%= link_to p, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-danger btn-xs" do %>
+            <i class="fa fa-trash-o fa-lg"></i> Excluir
+            <% end -%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+    
+  <p class="text-center">
+    <%= link_to 'Nova Profissão', new_profession_path, class: "btn btn-default btn-xs" %>
+  </p>
+</div>

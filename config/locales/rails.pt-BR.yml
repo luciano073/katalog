@@ -215,6 +215,7 @@ pt-BR:
       artist: "Artista"
       film: "Filme"
       country: "País"
+      profession: "Profissão"
     attributes:
       artist:
         name: "Nome Artístico"
@@ -238,5 +239,6 @@ pt-BR:
     new: "Cadastrar"
     films: "Filmes"
     artists: "Artistas"
+    professions: "Profissões"
     welcome: "Home"
 

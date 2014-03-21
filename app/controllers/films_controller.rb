@@ -27,18 +27,6 @@ class FilmsController < ApplicationController
   # GET /films/1/edit
   def edit    
 
-    # @directors = []
-    # @cast = []
-    # @writers = []
-    # @film.production_team.each do |e|
-    #   @directors << e.artist if e.director?
-    #   @writers << e.artist if e.writer?
-    #   @cast << e.artist if e.cast?
-    #   if (!e.cast? and !e.director? and !e.writer?)        
-    #     @cast << e.artist
-    #   end
-    # end
-    # @country = []
   end
 
   # POST /films

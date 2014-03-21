@@ -1,4 +1,4 @@
-<p><%= I18n.l Date.today, format: :long_day %></p>
+<p class="text-center"><%= I18n.l Date.today, format: :long_day %></p>
 <p id="total-films">Filmes cadastrados: <strong><%= Film.count %></strong></p>
 <p>Últimas entradas:</p>
 <% Film.last(3).each do |f| %>

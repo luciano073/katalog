@@ -26,6 +26,7 @@ Katalog::Application.routes.draw do
   resources :films
   resources :countries
   resources :media
+  resources :professions
   # Example resource route with options:
   #   resources :products do
   #     member do
