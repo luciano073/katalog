@@ -1,11 +1,11 @@
 <p class="text-center"><%= I18n.l Date.today, format: :long_day %></p>
-<p id="total-films">Filmes cadastrados: <strong><%= Film.count %></strong></p>
+<p id="total-films"><strong>Filmes cadastrados:</strong> <span class="total"><%= number_with_delimiter(Film.count) %></span></p>
 <p>Últimas entradas:</p>
 <% Film.last(3).each do |f| %>
   <p class='side-list'><strong>[</strong> <span class="d-create"><%= I18n.l f.created_at, format: '%d/%m/%Y, %H:%M' %></span> <strong>]</strong> - <%= normalize_title(f.brazilian_title) %></p>
   <hr>
 <% end -%>
-<p id='total-artists'>Artistas cadastrados: <strong><%= Artist.count %></strong></p>
+<p id='total-artists'><strong>Artistas cadastrados:</strong> <span class="total"><%= number_with_delimiter(Artist.count) %></span></p>
 
 <p>Últimas entradas:</p>
 <% Artist.last(3).each do |a| %>
