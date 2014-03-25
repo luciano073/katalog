@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220142227) do
+ActiveRecord::Schema.define(version: 20140323183708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20140220142227) do
     t.string   "photo"
     t.integer  "country_id"
   end
+
+  add_index "artists", ["name"], name: "index_artists_on_name", using: :btree
 
   create_table "artists_professions", id: false, force: true do |t|
     t.integer "artist_id",     null: false
@@ -57,6 +59,8 @@ ActiveRecord::Schema.define(version: 20140220142227) do
     t.integer  "country_id"
     t.string   "length"
   end
+
+  add_index "films", ["brazilian_title"], name: "index_films_on_brazilian_title", using: :btree
 
   create_table "media", force: true do |t|
     t.string   "type"

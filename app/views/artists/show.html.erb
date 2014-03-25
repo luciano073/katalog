@@ -6,6 +6,7 @@
     @artist.name) do %>
       <% image_tag @artist.photo_url(:medium).to_s, class: "img-thumbnail" %>
     <% end %>
+    <p class='text-center artist tip' data-toggle='tooltip' data-placement='bottom' title="Total de produções"><strong>[ </strong>Produções: <span class="total"><%= @artist.films.uniq.size %></span> <strong> ]</strong></p>
   </section>
   <section id="artist-profile" class="col-sm-9">
        
