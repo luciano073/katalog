@@ -4,6 +4,7 @@ class Country < ActiveRecord::Base
   has_many :media, :class_name => "medium"
 
   mount_uploader :flag, FlagUploader
+  paginates_per 10
   # scope :finder, lambda { |q| where("i_unaccent(countries.name) ilike
   # i_unaccent(:q)", q: "%#{q}%") }
 
