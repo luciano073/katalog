@@ -7,6 +7,7 @@ class Film < ActiveRecord::Base
   has_many         :artists, :through => :production_team
   belongs_to       :country
   scope            :random, -> {order('random()')}
+  paginates_per 10
 
   after_initialize do
     self.release               = I18n.l self.release if self.release

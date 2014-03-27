@@ -24,8 +24,8 @@ gem 'font-awesome-sass'
 gem 'carrierwave'
 gem 'rmagick'
 # Use will_paginate https://github.com/mislav/will_paginate
-gem 'will_paginate', '~> 3.0'
-
+# gem 'will_paginate', '~> 3.0'
+gem 'kaminari'
 # Format will_paginate html to match Twitter Bootstrap styling
 # [https://github.com/yrgoldteeth/bootstrap-will_paginate]
 #gem 'bootstrap-will_paginate'

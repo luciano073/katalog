@@ -136,6 +136,9 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
+      page_entries_info:
+        more_pages:
+          display_entries: '%{entry_name}s <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b>'
   number:
     currency:
       format:
@@ -241,4 +244,11 @@ pt-BR:
     artists: "Artistas"
     professions: "Profissões"
     welcome: "Home"
-
+  views:
+    pagination:
+      first: '&laquo; Início'
+      last: 'Final &raquo;'
+      previous: ""
+      next: ""
+      truncate: '&hellip;'
+    

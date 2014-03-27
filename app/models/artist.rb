@@ -20,6 +20,7 @@ class Artist < ActiveRecord::Base
   scope :cast,      -> { joins(:professions).where(professions: {id: [1, 4]})}
   scope :random,    -> {order('random()')} #specific to postgresql
 
+  paginates_per 10
 
   def profession_tokens=(ids)
     self.profession_ids = ids.split(",")

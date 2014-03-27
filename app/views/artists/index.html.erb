@@ -25,7 +25,9 @@
 <div class="row paginate">
   <div class="col-sm-4"></div>
   <div class="col-sm-4 text-center">
-    <%= will_paginate @artists, {previous_label: "&larr;", next_label: "&rarr;"} %>
+    <%#= will_paginate @artists, {previous_label: "&larr;", next_label: "&rarr;", inner_window: 1, outer_window: 2} %>
+    <%= paginate @artists %>
+    <!-- <p><%#= page_entries_info @artists %></p> -->
   </div>
   <div class="col-sm-4"></div>
 </div>

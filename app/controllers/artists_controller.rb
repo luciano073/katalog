@@ -4,8 +4,8 @@ class ArtistsController < ApplicationController
   
 
 	def index
-    @artists = Artist.search(params[:search]).paginate(page: params[:page],
-        per_page: 10).order('artists.name')
+    # @artists = Artist.search(params[:search]).order('artists.name').paginate(page: params[:page], per_page: 2)
+    @artists = Artist.search(params[:search]).order('artists.name').page(params[:page])
     respond_with @artists.as_json(only: [:id, :name])
 	end
   def search
