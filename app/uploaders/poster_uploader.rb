@@ -35,7 +35,7 @@ class PosterUploader < CarrierWave::Uploader::Base
     # For Rails 3.1+ asset pipeline compatibility:
     # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.jpg"].compact.join('_'))
   
-    "/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
+    "/images/fallback/" + [version_name, "no-poster.jpg"].compact.join('_')
   end
 
   # Process files as they are uploaded:
