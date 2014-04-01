@@ -66,13 +66,13 @@ class Artist < ActiveRecord::Base
   def name_normalize
     re = /\s+[ixv]{,3}\z/i # for names ends with II, III and so on
     if self.name
-      str = self.name.strip.squeeze(' ').nome_proprio
+      str = self.name.strip.squeeze(' ')
       str =~ re
       self.name = str.sub(re, $~.to_s.upcase)      
     end
 
     if self.real_name
-      str = self.real_name.strip.squeeze(' ').nome_proprio
+      str = self.real_name.strip.squeeze(' ')
       str =~ re
       self.real_name = str.sub(re, $~.to_s.upcase)
     end

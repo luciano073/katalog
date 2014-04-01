@@ -7,6 +7,10 @@
       <% image_tag @artist.photo_url(:medium).to_s, class: "img-thumbnail" %>
     <% end %>
     <p class='text-center artist tip' data-toggle='tooltip' data-placement='bottom' title="Total de produções"><strong>[ </strong>Produções: <span class="total"><%= @artist.films.uniq.size %></span> <strong> ]</strong></p>
+    <div class="text-center">
+      <%= link_to 'Editar', edit_artist_path(@artist), class: "btn btn-default btn-xs" %> |
+      <%= link_to 'Voltar', artists_path, class: "btn btn-default btn-xs" %>
+    </div>
   </section>
   <section id="artist-profile" class="col-sm-9">
        
@@ -69,15 +73,6 @@
       </ul>
     <% end %>
 
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4">
-        <%= link_to 'Editar', edit_artist_path(@artist) %> |
-        <%= link_to 'Voltar', artists_path %>
-      </div>
-      <div class="col-sm-4"></div>
-    </div>
-    
   </section>
 
 </div>

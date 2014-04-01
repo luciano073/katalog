@@ -6,6 +6,10 @@
       <% image_tag @film.poster_url(:medium), class: "img-thumbnail" %>
     <% end %>
     <p class='film-created tip' data-toggle='tooltip' data-placement='bottom' title="Data do cadastramento"><strong>[ </strong><%= I18n.l @film.created_at, format: '%d/%m/%Y, %H:%M' %> <strong> ]</strong></p>
+    <div class="text-center">
+      <%= link_to 'Editar', edit_film_path(@film), class: "btn btn-default btn-xs" %> |
+      <%= link_to 'Voltar', films_path, class: "btn btn-default btn-xs" %>
+    </div>
   </section>
   <section id="film-show" class="col-sm-9">
     <h3 class="text-center">
@@ -66,15 +70,7 @@
         <% end %>
       </ul>
     <% end %>
-
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4">
-        <%= link_to 'Editar', edit_film_path(@film), class: "btn btn-default btn-xs" %> |
-        <%= link_to 'Voltar', films_path, class: "btn btn-default btn-xs" %>
-      </div>
-      <div class="col-sm-4"></div>
-    </div>
+    
   </section>
 
 </div>

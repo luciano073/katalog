@@ -124,7 +124,7 @@ class Film < ActiveRecord::Base
     re = Regexp.new('^[ao]s?[[:blank:]]+|^the[[:blank:]]+|\Aan[[:blank:]]+|^u[mn]a?s?\s+', true)
     re_t = /\bi{2,3}\b|\bi[vx]\b|\b[vx]i{,3}\b/i # for titles with II, III and so on
     if self.brazilian_title
-      self.brazilian_title = self.brazilian_title.strip.squeeze(' ').nome_proprio
+      self.brazilian_title = self.brazilian_title.strip.squeeze(' ')
       str = self.brazilian_title.sub(re, '')
       self.brazilian_title = str + ", #{Regexp.last_match.to_s.sub(/\s/, '')}" if
       Regexp.last_match
@@ -132,7 +132,7 @@ class Film < ActiveRecord::Base
       self.brazilian_title = self.brazilian_title.sub(re_t, $~.to_s.upcase)
     end
     if self.title
-      self.title = self.title.strip.squeeze(' ').nome_proprio
+      self.title = self.title.strip.squeeze(' ')
       str = self.title.sub(re, '')
       self.title = str + ", #{$~.to_s.sub(/\s/, '')}" if $~
       str =~ re_t
