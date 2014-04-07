@@ -91,6 +91,8 @@ hr{
 }
 
 .tt-dropdown-menu {
+  max-height: 350px;
+  overflow-y: auto;
   width: 400px;
   margin-top: 12px;
   padding: 8px 0;

@@ -35,20 +35,16 @@ jQuery(document).ready(function($) {
   var films = new Bloodhound({
     datumTokenizer : function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
     queryTokenizer : Bloodhound.tokenizers.whitespace,
-    remote         : {
-    url            : '/films/search?q=%QUERY',
+    remote         : '/films/search?q=%QUERY',
     limit          : 10
-    }
     // prefetch: 'assets/films.json'
   });
 
   var artists = new Bloodhound({
     datumTokenizer : function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
     queryTokenizer : Bloodhound.tokenizers.whitespace,
-    remote         : {
-    url            : '/artists/search?q=%QUERY',
+    remote         : '/artists/search?q=%QUERY',
     limit          : 10
-    }
     // prefetch: 'assets/artists.json'
   });
 
@@ -64,8 +60,8 @@ jQuery(document).ready(function($) {
       displayKey : 'brazilian_title',
       source     : films.ttAdapter(),
       templates  : {
-      header     : '<h4 id="h-film">Filmes</h4> <hr width="80%">',
-      suggestion : Handlebars.compile([
+        header     : '<h4 id="h-film">Filmes</h4> <hr width="80%">',
+        suggestion : Handlebars.compile([
           '<img src="{{img_url}}" class="img-thumbnail"/>',
           '<p id="suggestion">{{brazilian_title}}</p>',
           '<span id="year-film"> ({{year}})</span>'
@@ -77,8 +73,8 @@ jQuery(document).ready(function($) {
       displayKey : 'name',
       source     : artists.ttAdapter(),
       templates  : {
-      header     : '<h4 id="h-artist">Artistas</h4> <hr width="80%">',
-      suggestion : Handlebars.compile([
+        header     : '<h4 id="h-artist">Artistas</h4> <hr width="80%">',
+        suggestion : Handlebars.compile([
           '<img src="{{img_url}}" class="img-thumbnail"/>',
           '<p id="suggestion">{{name}}</p>'
           ].join(''))
