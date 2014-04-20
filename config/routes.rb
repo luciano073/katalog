@@ -1,5 +1,7 @@
 Katalog::Application.routes.draw do
   
+  # resources :pictures
+
   get "welcome/index"
   # get "welcome/films_prefetch"
   # get "welcome/artists_prefetch"
@@ -22,8 +24,12 @@ Katalog::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :artists
-  resources :films
+  resources :artists do
+    resources :pictures
+  end
+  resources :films do
+    resources :pictures
+  end
   resources :countries
   resources :media
   resources :professions

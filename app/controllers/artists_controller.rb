@@ -28,7 +28,8 @@ class ArtistsController < ApplicationController
 ## end actions to token input
 
   def new
-    @artist = Artist.new        
+    @artist = Artist.new
+    # @picture = @artist.pictures.build      
   end
 
   def edit
@@ -39,6 +40,9 @@ class ArtistsController < ApplicationController
     @artist = Artist.new(artist_params)
     respond_to do |format|
       if @artist.save
+        # params[:pictures]['image'].each do |p|
+        #   @pictures = @artist.pictures.create!(image: p, imageable_id: @artist.id, imageable_type: "Artist")
+        # end
         format.html { redirect_to @artist, notice: 'Artista criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @artist }
       else
@@ -51,6 +55,10 @@ class ArtistsController < ApplicationController
   def update
     respond_to do |format|
       if @artist.update(artist_params)
+        # @artist.pictures.clear
+        # params[:pictures]['image'].each do |p|
+        #   @pictures = @artist.pictures.create!(image: p, imageable_id: @artist.id, imageable_type: "Artist")
+        # end
         format.html { redirect_to @artist, notice: 'Artista atualizado com sucesso.' }
         format.json { head :no_content }
       else
@@ -61,6 +69,9 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    @imageable = @artist
+    @pictures = @imageable.pictures
+    @picture = Picture.new
   end
 
   def destroy
@@ -75,6 +86,7 @@ class ArtistsController < ApplicationController
 
   def set_artist
     @artist = Artist.find(params[:id])
+
   end
 
   

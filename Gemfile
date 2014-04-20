@@ -23,6 +23,7 @@ gem 'font-awesome-sass'
 # gem 'paperclip', '~> 3.0'
 gem 'carrierwave'
 gem 'rmagick'
+gem "jquery-fileupload-rails"
 # Use will_paginate https://github.com/mislav/will_paginate
 # gem 'will_paginate', '~> 3.0'
 gem 'kaminari'

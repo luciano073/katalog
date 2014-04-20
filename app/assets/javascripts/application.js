@@ -16,6 +16,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.bxslider.min
+//= require jasny-bootstrap
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require lightbox-2.6.min
 //= require jquery.validationEngine
 //= require jquery.validationEngine-pt_BR

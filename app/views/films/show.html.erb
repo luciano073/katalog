@@ -74,7 +74,13 @@
   </section>
 
 </div>
-
+<hr>
+<div id="pictures">
+  <%= render @film.pictures %>
+</div>
+<% if @film.pictures.size < 6 %>
+  <%= render file: 'pictures/new' %>
+<% end -%>
 <!-- bootstrap modal -->
 <div class="modal fade" id="film-cast" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

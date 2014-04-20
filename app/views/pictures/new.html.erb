@@ -1,0 +1,28 @@
+<section id="images" class="col-sm-12">
+  <%#= form_for([@picture, @imageable.pictures.new], url: [@imageable, @imageable.pictures.new], html: {multpart: true, class: "form-horizontal", role: "form"}) do |f| %>
+  <%= form_for [@imageable, @picture], html: {multpart: true, class: "form-horizontal", role: 'form'} do |f| %>
+    <div class="row">
+      <div class="col-sm-5"></div>
+
+      <div class="center-block fileinput fileinput-new" data-provides="fileinput">
+        <span class="btn btn-primary btn-file">
+          <i class="glyphicon glyphicon-plus"></i>
+          <span> Imagens</span>
+          <%= f.file_field :image, multiple: true, name: "picture[image]" %>
+        </span>
+      </div>
+
+      <div class="col-sm-5"></div>
+        <%#= image_tag @artist.photo_url(:thumb), class: "img-thumbnail" if @artist.photo? %>
+        <%#= f.file_field :photo, multiple: true %>
+    </div>
+  
+  <% end %>
+
+  <script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    {%=o.name%}
+    <div class="progress"><div class="progress-bar" style="width: 0%"><div></div>
+  </div>
+  </script>
+</section>

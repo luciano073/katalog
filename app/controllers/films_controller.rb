@@ -17,6 +17,9 @@ class FilmsController < ApplicationController
   # GET /films/1
   # GET /films/1.json
   def show
+    @imageable = @film
+    @pictures = @imageable.pictures
+    @picture = Picture.new
   end
 
   # GET /films/new

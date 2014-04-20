@@ -11,6 +11,8 @@
  * require select2
  * require select2-bootstrap
  * require bootstrap-tokenfield
+ *= require jasny-bootstrap
+ *= require jquery.fileupload-ui
  *= require token-input-facebook
  *= require token-input
  *= require jquery-ui
@@ -72,4 +74,5 @@ a#home{
     color: #fff;
   }
 }
+
 

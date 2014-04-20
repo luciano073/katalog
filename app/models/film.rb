@@ -7,6 +7,7 @@ class Film < ActiveRecord::Base
   has_many         :artists, :through => :production_team
   belongs_to       :country
   scope            :random, -> {order('random()')}
+  has_many :pictures, as: :imageable
   paginates_per 10
 
   after_initialize do

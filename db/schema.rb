@@ -11,11 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323183708) do
+ActiveRecord::Schema.define(version: 20140412142238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_table "artist_attachments", force: true do |t|
+    t.string   "photo"
+    t.integer  "artist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "artist_attachments", ["artist_id"], name: "index_artist_attachments_on_artist_id", using: :btree
 
   create_table "artists", force: true do |t|
     t.string   "name"
@@ -74,6 +83,17 @@ ActiveRecord::Schema.define(version: 20140323183708) do
     t.datetime "updated_at"
     t.integer  "country_id"
   end
+
+  create_table "pictures", force: true do |t|
+    t.string   "image"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "info"
+  end
+
+  add_index "pictures", ["imageable_id", "imageable_type"], name: "index_pictures_on_imageable_id_and_imageable_type", using: :btree
 
   create_table "production_team", force: true do |t|
     t.integer  "film_id"

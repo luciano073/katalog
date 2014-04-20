@@ -12,6 +12,8 @@ class Artist < ActiveRecord::Base
   has_many                :films, :through => :production_team
   has_many                :production_team, dependent: :nullify
   belongs_to              :country
+  has_many :pictures, as: :imageable
+  # accepts_nested_attributes_for :pictures
 
   mount_uploader :photo, PhotoUploader
 

@@ -1,30 +1,38 @@
 <% content_for :title, navigation %>
 <div class="row">
   
-  <section id="artist-photo" class="col-sm-3">
+  <section id="artist-images" class="col-sm-3">
+    
+    
+
     <%= link_to(@artist.photo_url(:normal), data: {lightbox: "photo"}, title:
     @artist.name) do %>
       <% image_tag @artist.photo_url(:medium).to_s, class: "img-thumbnail" %>
     <% end %>
-    <p class='text-center artist tip' data-toggle='tooltip' data-placement='bottom' title="Total de produções"><strong>[ </strong>Produções: <span class="total"><%= @artist.films.uniq.size %></span> <strong> ]</strong></p>
-    <div class="text-center">
+
+    <p class='text-center artist'><strong>[ </strong>Produções: <span class="total"><%= @artist.films.uniq.size %></span> <strong> ]</strong></p>
+
+    <div id='links' class="text-center">
       <%= link_to 'Editar', edit_artist_path(@artist), class: "btn btn-default btn-xs" %> |
       <%= link_to 'Voltar', artists_path, class: "btn btn-default btn-xs" %>
     </div>
+
+    
+    
   </section>
+
   <section id="artist-profile" class="col-sm-9">
-       
     <h3 class="text-center"><%= @artist.name %> </h3>
-   
+       
     <p class="text-center art-real-name" >
       <small class="original-name tip" data-toggle="tooltip" data-placement="bottom" title="Nome de batismo">" <%= @artist.real_name %> "</small>&nbsp; <%= image_tag(@artist.country.flag.url(:_16), title: @artist.country.name, class: 'tip', data: {toggle: 'tooltip', placement: 'right'}) if @artist.country%>
     </p>
     <% if @artist.death %>
       <p class="text-center">
         <small><%= "(#{@artist.birthday.year} - #{@artist.death.year})" %></small>
-
+    
       </p>      
-    <% end %>   
+    <% end %>
     
     <table id="artist-data" class="table table-borderless">
       <colgroup>
@@ -76,6 +84,13 @@
   </section>
 
 </div>
+<hr>
+<div id="pictures">
+  <%= render @artist.pictures %>
+</div>
+<% if @artist.pictures.size < 6 %>
+  <%= render file: 'pictures/new' %>
+<% end -%>
 
 <!-- bootstrap modal -->
 <div class="modal fade" id="artist-productions" tabindex="-1" role="dialog" aria-labelledby="artistModalLabel" aria-hidden="true">

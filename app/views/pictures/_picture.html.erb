@@ -1,0 +1,10 @@
+<div class="artist-pictures">
+  <%= div_for picture, class: "col-sm-2 images" do %>
+    <%= image_tag picture.image_url(:thumb), title: picture.info, class: "center-block" %>
+    <p class="text-center">
+      <%= link_to([@imageable, picture], data: {confirm: 'Tem certeza?'}, method: :delete, class: 'btn btn-xs btn-labeled btn-danger img-remove', remote: true) do %>
+      <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span> Remover
+      <% end %>
+    </p>
+  <% end %>
+</div>

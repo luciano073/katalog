@@ -1,0 +1,8 @@
+$("#picture_<%= @picture.id %>").remove();
+<% if @imageable.pictures.empty? %>
+  $('div#pictures').remove();
+<% end %>
+
+<% if @imageable.pictures.size < 6 %>
+  $('section#images').show('slow');
+<% end %>

@@ -60,6 +60,23 @@ jQuery(document).ready(function($) {
     slideWidth      : 130
   });
 
+  $('#artist-imgs').bxSlider({
+    mode: 'vertical',
+    auto            : true,
+    // autoControls : true,
+    // captions     : true,
+    controls        : false,
+    autoHover       : true,
+    // minSlides       : 1,
+    // maxSlides       : 1,
+    speed           : 1000,
+    adaptiveHeight: true,
+    adaptiveHeightSpeed: 1000
+    // slideMargin     : 10,
+    // moveSlides      : 2,
+    // slideWidth      : 130
+  });
+
   
 });
 
