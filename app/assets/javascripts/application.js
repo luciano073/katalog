@@ -10,13 +10,14 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+// require select2_locale_pt-BR
+// require select2
 // require jquery-ui
 // require jquery-ui-extension-accentFolding
+//= require jquery
 //= require jquery_ujs
-//= require bootstrap
-//= require jquery.bxslider.min
 //= require jasny-bootstrap
+//= require jquery.bxslider.min
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require lightbox-2.6.min
@@ -26,8 +27,7 @@
 //= require handlebars-v1.3.0
 //= require jquery.tokeninput
 //= require meiomask.min
-// require select2
-// require select2_locale_pt-BR
+//= require bootstrap
 //= require turbolinks
 //= require_tree .
 

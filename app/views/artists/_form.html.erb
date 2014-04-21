@@ -65,7 +65,7 @@
             <label><%= f.check_box :remove_photo %>Remover</label>
           <% end -%>
           <span class="btn btn-xs btn-default btn-file">
-            <span class="fileinput-new">Escolher imagem</span>
+            <span class="fileinput-new">Escolher foto</span>
             <span class="fileinput-exists">Trocar</span>
             <%= f.file_field :photo %>
           </span>
@@ -83,13 +83,3 @@
       </div>
     </div>
 <% end %>
-<!-- <hr> -->
-<!-- <div id="pictures">
-  <#% unless @artist.pictures.empty? %>
-    <h4 class="text-center">Outras Imagens do Artista</h4>
-    <%#= render @artist.pictures  %>
-  <#% end -%>
-</div>
-<#% if @artist.pictures.size < 6 %>
-  <%#= render file: 'pictures/new' %>
-<#% end -%> -->
