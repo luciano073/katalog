@@ -18,6 +18,22 @@ p.film-created{
     // font-weight: bold;
 }
 
+//estilizando botoes de foto no form edit
+.film-poster{
+    // border: 1px solid #000;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+}
+
+label.film-poster{
+    // margin-top: 1px !important;
+    padding-top: 1px !important;
+}
+
+div.film-submit{
+    margin-top: 20px;
+}
+
 .table-borderless td,
 .table-borderless th {
     border: 0 !important;

@@ -33,6 +33,9 @@ class ArtistsController < ApplicationController
   end
 
   def edit
+    @imageable = @artist
+    @pictures = @imageable.pictures
+    @picture = Picture.new
   end
 
   def create
