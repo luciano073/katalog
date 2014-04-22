@@ -70,35 +70,27 @@
   <div class="form-group film-poster">
     <%= f.label :poster, class: "col-sm-3 control-label" %>
 
-    <div class="col-sm-4 fileinput fileinput-new film-poster" data-provides="fileinput">
+    <div class="col-sm-4 film-poster fileinput fileinput-new" data-provides="fileinput">
       <div class="fileinput-preview thumbnail film-poster" data-trigger="fileinput" style="width: 100px; height: 130px;">
         <%= image_tag @film.poster_url(:thumb) %>
-        
       </div>
-      <!-- <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 100px; max-height: 150px;"></div> -->
+
+      <div class="film-poster">
+        <% if @film.poster? %>
+          <label class="control-label film-poster"><%= f.check_box :remove_poster, class: "film-poster" %> Remover</label>
+        <% end -%>
+      </div>
+
+      <div class="film-poster">
+        <span class="btn btn-xs btn-default btn-file">
+          <span class="fileinput-new">Escolher poster</span>
+          <span class="fileinput-exists">Trocar</span>
+          <%= f.file_field :poster %>
+          <%= f.hidden_field :poster_cache %>
+        </span>
+        <a href="#" class="btn btn-xs btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
+      </div>
       
-    </div>
-  </div>
-
-  <div class="form-group film-poster">
-    <div class="col-sm-offset-3 col-sm-7 film-poster">
-      <% if @film.poster? %>
-        
-        <label class="control-label film-poster"><%= f.check_box :remove_poster, class: "film-poster" %> Remover</label>
-        
-      <% end -%>
-    </div>
-  </div>
-
-  <div class="form-group film-poster">
-    <div class="col-sm-offset-3 col-sm-7 fileinput fileinput-new film-poster">
-      <span class="btn btn-xs btn-default btn-file">
-        <span class="fileinput-new">Escolher foto</span>
-        <span class="fileinput-exists">Trocar</span>
-        <%= f.file_field :poster %>
-        <%= f.hidden_field :poster_cache %>
-      </span>
-      <a href="#" class="btn btn-xs btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
     </div>
   </div>
 
