@@ -38,7 +38,9 @@ class FilmsController < ApplicationController
 
   # GET /films/1/edit
   def edit    
-
+    @imageable = @film
+    @pictures = @imageable.pictures
+    @picture = Picture.new
   end
 
   # POST /films

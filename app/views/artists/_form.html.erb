@@ -51,45 +51,45 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group artist-photo">
       <%= f.label :photo, class: "col-sm-3 control-label" %>
 
-      <div class="col-sm-3 fileinput fileinput-new" data-provides="fileinput">
-        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 100px; height: 130px;">
+      <div class="col-sm-4 fileinput fileinput-new artist-photo" data-provides="fileinput">
+        <div class="fileinput-preview thumbnail artist-photo" data-trigger="fileinput" style="width: 100px; height: 130px;">
           <%= image_tag @artist.photo_url(:thumb) %>
-          
         </div>
-        <!-- <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 100px; max-height: 150px;"></div> -->
-        <div>
+
+        <div class="artist-photo">
           <% if @artist.photo? %>
-            <label><%= f.check_box :remove_photo %>Remover</label>
+            <label class="control-label artist-photo"><%= f.check_box :remove_photo, class: "artist-photo" %> Remover</label>
           <% end -%>
+        </div>
+
+        <div class="artist-photo">
           <span class="btn btn-xs btn-default btn-file">
-            <span class="fileinput-new">Escolher imagem</span>
+            <span class="fileinput-new">Escolher foto</span>
             <span class="fileinput-exists">Trocar</span>
             <%= f.file_field :photo %>
           </span>
           <a href="#" class="btn btn-xs btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
         </div>
+        
       </div>
-        <%#= image_tag @artist.photo_url(:thumb), class: "img-thumbnail" if @artist.photo? %>
-        <%#= f.file_field :photo, multiple: true %>
     </div>
 
-
-    <div class="form-group">
+    <div class="form-group artist-submit">
       <div class="col-sm-offset-3 col-sm-7">
         <%= f.submit nil, data: {:disable_with => 'Enviando...'}, class: "btn btn-sm btn-default" %>
       </div>
     </div>
 <% end %>
-<!-- <hr> -->
-<!-- <div id="pictures">
-  <#% unless @artist.pictures.empty? %>
-    <h4 class="text-center">Outras Imagens do Artista</h4>
-    <%#= render @artist.pictures  %>
-  <#% end -%>
-</div>
-<#% if @artist.pictures.size < 6 %>
-  <%#= render file: 'pictures/new' %>
-<#% end -%> -->
+
+<% if params[:action] == 'edit' %>
+  <hr>
+  <div id="pictures">
+    <%= render @artist.pictures %>
+  </div>
+  <% if @artist.pictures.size < 6 %>
+    <%= render file: 'pictures/new' %>
+  <% end -%>
+<% end -%>
