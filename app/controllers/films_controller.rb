@@ -8,6 +8,15 @@ class FilmsController < ApplicationController
   def index
     # @films = Film.search(params[:search]).paginate(page: params[:page], per_page: 10).order('films.brazilian_title')
     @films = Film.search(params[:search]).order('films.brazilian_title').page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.pdf {
+        render pdf: "films-list-report",
+        header: {center: "Filmes cadastrados em: #{I18n.l Date.today}"},
+        footer: {center: "[page] de [topage]"}
+      }
+    end
   end
 
   def search

@@ -12,6 +12,10 @@ gem 'sass-rails', '~> 4.0.0'
 # Use bootstrap version 3.0
 gem 'bootstrap-sass', '~> 3.0.2.0'
 gem 'font-awesome-sass'
+
+#Generate pdf reports
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 # gem 'select2-rails'
 # Use Foundation
 # gem 'compass-rails', '~> 2.0.alpha.0' #you need this or you get an err
