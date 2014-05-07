@@ -1,0 +1,9 @@
+<table>
+  <tbody>
+    <% Artist.all.order(:name).each do |a| %>
+      <tr>
+        <td><%= "#{a.name}" %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>

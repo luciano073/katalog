@@ -1,5 +1,18 @@
-<h1>Lista de Filmes</h1>
 
-<% @films.each do |film| %>
-  <p><%= film.title %></p>
-<% end -%>
+<table>
+  <tbody>
+    <% Film.all.order(:brazilian_title).each do |film| %>
+      <tr>
+        <td><%= "#{film.brazilian_title} (#{film.release.year if film.release})" %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+<!-- <ul class="list-group">
+  <#% @films.each do |film| %>
+    <li class="list-group-item">
+      <span class="badge"><%#= film.release.year if film.release %></span>
+      <%#= film.title %>
+    </li>
+  <#% end -%>
+</ul> -->

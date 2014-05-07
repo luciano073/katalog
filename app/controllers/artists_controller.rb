@@ -1,12 +1,23 @@
 class ArtistsController < ApplicationController
-  respond_to :html, :json
+  # respond_to :html, :json
+  include ActionView::Helpers::NumberHelper
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
   
 
 	def index
     # @artists = Artist.search(params[:search]).order('artists.name').paginate(page: params[:page], per_page: 2)
     @artists = Artist.search(params[:search]).order('artists.name').page(params[:page])
-    respond_with @artists.as_json(only: [:id, :name])
+
+    respond_to do |format|
+      format.html
+      format.json {@artists.as_json(only: [:id, :name])}
+      format.pdf {
+        render pdf: "artists-list-report",
+        encoding: 'utf-8',
+        header: {center: "[ #{I18n.l Date.today, format: '%d.%m.%Y'} - #{number_with_delimiter(Artist.count)} artistas cadastrados. ]"},
+        footer: {center: "[page] de [topage]"}
+      }
+    end
 	end
   def search
     @artists = Artist.search(params[:q])

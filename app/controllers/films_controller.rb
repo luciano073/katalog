@@ -1,4 +1,5 @@
 class FilmsController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   before_action :set_film, only: [:show, :edit, :update, :destroy]
   # before_action :set_production_team, only: [:create, :update]
   before_action :genres_list, only: [:new, :edit, :update]
@@ -13,7 +14,8 @@ class FilmsController < ApplicationController
       format.html
       format.pdf {
         render pdf: "films-list-report",
-        header: {center: "Filmes cadastrados em: #{I18n.l Date.today}"},
+        encoding: 'utf-8',
+        header: {center: "[ #{I18n.l Date.today, format: '%d.%m.%Y'} - #{number_with_delimiter(Film.count)} filmes cadastrados. ]"},
         footer: {center: "[page] de [topage]"}
       }
     end
