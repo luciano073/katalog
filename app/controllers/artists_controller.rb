@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-  # respond_to :html, :json
+  respond_to :html, :json
   include ActionView::Helpers::NumberHelper
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
   
