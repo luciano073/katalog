@@ -1,0 +1,17 @@
+<h4 class="text-center">" Formulário de Buscas "</h4>
+<p><strong>Filmes lançados entre:</strong></p>
+<%= form_tag({controller: "advanced_search", action: "range_release"}, :class => "form-inline", method: 'get', role: 'form', id: 'search_film_release') do %>
+  <div class="form-group">
+    <label for="inicial_release", class="sr-only">Data Inicial</label>
+    <%= text_field_tag('inicial_release', nil, {class: "form-control text-center date validate[custom[validDate]]", placeholder: "DD/MM/AAAA"}) %>
+  </div>
+
+  <div class="form-group">
+    <label for="final_release", class="sr-only">Data Final</label>
+    <%= text_field_tag('final_release', nil, {class: "form-control text-center date validate[custom[validDate]]", placeholder: "DD/MM/AAAA"}) %>
+  </div>
+  <%= button_tag('Buscar', data: {disable_with: 'buscando...'}, class: 'btn btn-default') %>
+<% end -%>
+<hr>
+
+<p><strong>Filmes pelo título original:</strong></p>

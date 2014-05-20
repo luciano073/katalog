@@ -1,0 +1,12 @@
+<h4 class="text-center">FILMES LANÇADOS ENTRE: <strong>[</strong> <span id="film-range"><%= I18n.l @inicial_day, format: "%d.%m.%Y" %> <strong>//</strong> <%= I18n.l @final_day, format: "%d.%m.%Y" %></span> <strong>]</strong>. TOTAL: <span class="label label-info"><%= @films.total_count %></span></h4>
+
+<%= paginate @films %>
+
+<ul class="list-group">
+  <% @films.each do |f| %>
+    <li class="list-group-item">
+      <span class="badge"><%= I18n.l f.release, format: "%d.%m.%Y" if f.release %></span>
+      <%= link_to(f.brazilian_title, f) %>
+    </li>
+  <% end -%>
+</ul>

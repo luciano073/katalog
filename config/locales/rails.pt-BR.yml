@@ -136,9 +136,9 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
-      page_entries_info:
-        more_pages:
-          display_entries: '%{entry_name}s <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b>'
+    page_entries_info:
+      more_pages:
+        display_entries: '%{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b>'
   number:
     currency:
       format:
@@ -215,9 +215,9 @@ pt-BR:
     errors:
       <<: *errors
     models:
-      artist: "Artista"
-      film: "Filme"
-      country: "País"
+      artist: Artista
+      film: Filme
+      country: País
       profession: "Profissão"
     attributes:
       artist:
