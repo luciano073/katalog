@@ -6,7 +6,7 @@
   <% @films.each do |f| %>
     <li class="list-group-item">
       <span class="badge"><%= I18n.l f.release, format: "%d.%m.%Y" if f.release %></span>
-      <%= link_to(f.brazilian_title, f) %>
+      <%= link_to(normalize_title(f.brazilian_title), f) %>
     </li>
   <% end -%>
 </ul>

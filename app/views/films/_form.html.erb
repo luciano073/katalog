@@ -1,4 +1,20 @@
 <% content_for :title, navigation %>
+
+<% if @film.errors.any? %>
+  <section class="col-sm-offset-3 col-sm-7 panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title text-center">Erros no formulário!</h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <% @film.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end -%>
+      </ul>
+    </div>
+  </section>
+<% end -%>
+
 <%= form_for(@film, html: {multipart: true, class: "form-horizontal", role: 'form'}) do |f| %>
   
   <div class="form-group">

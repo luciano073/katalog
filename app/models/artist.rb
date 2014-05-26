@@ -24,6 +24,9 @@ class Artist < ActiveRecord::Base
 
   paginates_per 10
 
+  validates :name, uniqueness: { scope: :birthday, case_sensitive: false}
+
+
   def profession_tokens=(ids)
     self.profession_ids = ids.split(",")
   end

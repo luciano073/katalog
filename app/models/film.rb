@@ -10,6 +10,8 @@ class Film < ActiveRecord::Base
   has_many :pictures, as: :imageable
   paginates_per 10
 
+  validates :title, uniqueness: { scope: :release, case_sensitive: false}
+
   after_initialize do
     self.release               = I18n.l self.release if self.release
     self.cast_has_changed      = false
