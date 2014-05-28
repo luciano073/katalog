@@ -1,0 +1,13 @@
+<h4 class="text-center">FILMES COM O TERMO DE BUSCA: <strong>[</strong> '<code id="film-range"><%= @term %></code>' <strong>]</strong>. TOTAL: <kbd><%= @films.total_count %></kbd></h4>
+
+<%= paginate @films %>
+
+<ul class="list-group">
+  <% @films.each do |f| %>
+    <li class="list-group-item">
+      <span class="badge"><%= I18n.l f.release, format: "%d.%m.%Y" if f.release %></span>
+      <%= image_tag f.poster_url(:mini).to_s, class: "img-thumbnail" %> &nbsp;
+      <%= link_to(normalize_title(f.title), f) %>
+    </li>
+  <% end -%>
+</ul>

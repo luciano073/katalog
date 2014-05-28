@@ -120,7 +120,10 @@ class FilmsController < ApplicationController
         {id: 10, name: "Policial"},
         {id: 11, name: "Romance"},
         {id: 12, name: "Guerra"},
-        {id: 13, name: "Fantasia"}
+        {id: 13, name: "Fantasia"},
+        {id: 14, name: "Crime"},
+        {id: 15, name: "Épico"},
+        {id: 16, name: "Zumbi"}
       ].sort_by {|e| e[:name]}
     end
 end

@@ -1,4 +1,4 @@
-<h4 class="text-center">FILMES LANÇADOS ENTRE: <strong>[</strong> <span id="film-range"><%= I18n.l @inicial_day, format: "%d.%m.%Y" %> <strong>//</strong> <%= I18n.l @final_day, format: "%d.%m.%Y" %></span> <strong>]</strong>. TOTAL: <span class="label label-info"><%= @films.total_count %></span></h4>
+<h4 class="text-center">FILMES LANÇADOS ENTRE: <strong>[</strong> <code id="film-range"><%= I18n.l @inicial_day, format: "%d.%m.%Y" %> <kbd>//</kbd> <%= I18n.l @final_day, format: "%d.%m.%Y" %></code> <strong>]</strong>. TOTAL: <kbd><%= @films.total_count %></kbd></h4>
 
 <%= paginate @films %>
 
@@ -6,6 +6,7 @@
   <% @films.each do |f| %>
     <li class="list-group-item">
       <span class="badge"><%= I18n.l f.release, format: "%d.%m.%Y" if f.release %></span>
+      <%= image_tag f.poster_url(:mini).to_s, class: "img-thumbnail" %> &nbsp;
       <%= link_to(normalize_title(f.brazilian_title), f) %>
     </li>
   <% end -%>

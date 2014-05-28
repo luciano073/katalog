@@ -2,6 +2,7 @@ Katalog::Application.routes.draw do
   
   get "advanced_search/home"
   get "advanced_search/range_release"
+  get "advanced_search/title_search"
   # resources :pictures
 
   get "welcome/index"

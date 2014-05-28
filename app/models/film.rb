@@ -89,9 +89,9 @@ class Film < ActiveRecord::Base
     @writer_ids = ids.split(",")
   end
 
-  def self.search(search)
+  def self.search(col= 'brazilian_title', search)
     if search
-      where('i_unaccent(films.brazilian_title) LIKE i_unaccent(?)', "%#{search}%")
+      where("i_unaccent(films.#{col}) LIKE i_unaccent(?)", "%#{search}%")
     else
       self.all
     end

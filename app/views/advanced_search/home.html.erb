@@ -1,6 +1,6 @@
 <h4 class="text-center">" Formulário de Buscas "</h4>
 <p><strong>Filmes lançados entre:</strong></p>
-<%= form_tag({controller: "advanced_search", action: "range_release"}, :class => "form-inline", method: 'get', role: 'form', id: 'search_film_release') do %>
+<%= form_tag({controller: "advanced_search", action: "range_release"}, :class => "form-inline search-form", method: 'get', role: 'form', id: 'search_film_release') do %>
   <div class="form-group">
     <label for="inicial_release", class="sr-only">Data Inicial</label>
     <%= text_field_tag('inicial_release', nil, {class: "form-control text-center date validate[custom[validDate]]", placeholder: "DD/MM/AAAA"}) %>
@@ -15,3 +15,12 @@
 <hr>
 
 <p><strong>Filmes pelo título original:</strong></p>
+<%= form_tag({controller: "advanced_search", action: "title_search"}, :class => "form-inline search-form", method: 'get', role: 'form', id: 'title_search') do %>
+  <div class="form-group">
+    <label for="search", class="sr-only">Termo de busca</label>
+    <%= text_field_tag('search', nil, {class: "form-control text-center validate[required,minSize[2]]", placeholder: "termo de busca"}) %>
+  </div>
+
+  <%= button_tag('Buscar', data: {disable_with: 'buscando...'}, class: 'btn btn-default') %>
+<% end -%>
+<hr>

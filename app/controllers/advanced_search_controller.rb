@@ -15,4 +15,9 @@ class AdvancedSearchController < ApplicationController
     end
     @films = Film.where(release: @inicial_day.to_s..@final_day.to_s).order(:release).page(params[:page]).per(20)
   end
+
+  def title_search
+    @term = params[:search]
+    @films = Film.search("title", @term).order('films.title').page(params[:page])
+  end
 end
